@@ -49,5 +49,7 @@ fn main() {
         };
         
         println!("cargo:rustc-link-search={}/gvr/libs/{}", env!("CARGO_MANIFEST_DIR"), abi);
+        println!("cargo:rustc-link-lib=gvr");
+        println!("cargo:rustc-link-lib=gvr_audio");
     }
 }

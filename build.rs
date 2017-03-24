@@ -12,7 +12,10 @@ fn main() {
     let mut bindings = Builder::default()
                 .no_unstable_rust()
                 .header("gvr/wrapper.h")
-                .clang_arg("-std=c99");
+                .clang_arg("-std=c99")
+                .opaque_type("std.*")
+                .whitelisted_type("gvr.*")
+                .whitelisted_function("gvr.*");
 
     if android {
         // Add Android macros and sysroot to generate correct JNI methods in the API

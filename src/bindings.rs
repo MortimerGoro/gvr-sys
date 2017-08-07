@@ -20,7 +20,11 @@ pub enum gvr_viewer_type {
 }
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-pub enum gvr_feature { GVR_FEATURE_ASYNC_REPROJECTION = 0, }
+pub enum gvr_feature {
+    GVR_FEATURE_ASYNC_REPROJECTION = 0,
+    GVR_FEATURE_MULTIVIEW = 1,
+    GVR_FEATURE_EXTERNAL_SURFACE = 2,
+}
 /// Version information for the Google VR API.
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -222,7 +226,8 @@ fn bindgen_test_layout_gvr_vec3f() {
 impl Clone for gvr_vec3f {
     fn clone(&self) -> Self { *self }
 }
-/// A floating point 4x4 matrix.
+/// A floating point 4x4 matrix stored in row-major form. It needs to be
+/// transposed before being used with OpenGL.
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct gvr_mat4f {
@@ -250,11 +255,11 @@ impl Clone for gvr_mat4f {
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct gvr_quatf {
-    /// qx, qy, qz are the vector component.
+    /// qx, qy, qz are the vector components.
     pub qx: f32,
     pub qy: f32,
     pub qz: f32,
-    /// qw is the linelar component.
+    /// qw is the scalar component.
     pub qw: f32,
 }
 #[test]
@@ -483,11 +488,12 @@ pub type gvr_audio_source_id = i32;
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_audio_surround_format_type {
     GVR_AUDIO_SURROUND_FORMAT_INVALID = 0,
-    GVR_AUDIO_SURROUND_FORMAT_SURROUND_STEREO = 1,
-    GVR_AUDIO_SURROUND_FORMAT_SURROUND_FIVE_DOT_ONE = 2,
-    GVR_AUDIO_SURROUND_FORMAT_FIRST_ORDER_AMBISONICS = 3,
-    GVR_AUDIO_SURROUND_FORMAT_SECOND_ORDER_AMBISONICS = 4,
-    GVR_AUDIO_SURROUND_FORMAT_THIRD_ORDER_AMBISONICS = 5,
+    GVR_AUDIO_SURROUND_FORMAT_SURROUND_MONO = 1,
+    GVR_AUDIO_SURROUND_FORMAT_SURROUND_STEREO = 2,
+    GVR_AUDIO_SURROUND_FORMAT_SURROUND_FIVE_DOT_ONE = 3,
+    GVR_AUDIO_SURROUND_FORMAT_FIRST_ORDER_AMBISONICS = 4,
+    GVR_AUDIO_SURROUND_FORMAT_SECOND_ORDER_AMBISONICS = 5,
+    GVR_AUDIO_SURROUND_FORMAT_THIRD_ORDER_AMBISONICS = 6,
 }
 #[repr(u32)]
 /// Valid color formats for swap chain buffers.
@@ -519,6 +525,14 @@ pub enum gvr_reprojection {
 pub enum gvr_controller_handedness {
     GVR_CONTROLLER_RIGHT_HANDED = 0,
     GVR_CONTROLLER_LEFT_HANDED = 1,
+}
+#[repr(u32)]
+/// Types of gaze behaviors used for arm model.
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum gvr_arm_model_behavior {
+    GVR_ARM_MODEL_SYNC_GAZE = 0,
+    GVR_ARM_MODEL_FOLLOW_GAZE = 1,
+    GVR_ARM_MODEL_IGNORE_GAZE = 2,
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -613,8 +627,7 @@ extern "C" {
 extern "C" {
     /// Initializes necessary GL-related objects and uses the current thread and
 /// GL context for rendering. Please make sure that a valid GL context is
-/// available when this function is called.  This should never be called more
-/// than once on the same GL context (doing so would cause resource leaks).
+/// available when this function is called.
 ///
 /// @param gvr Pointer to the gvr instance to be initialized.
     pub fn gvr_initialize_gl(gvr: *mut gvr_context);
@@ -649,6 +662,9 @@ extern "C" {
 /// method should always be called after calling refresh_viewer_profile(). That
 /// will ensure that the populated viewports reflect the currently paired
 /// viewer.
+///
+/// This function assumes that the client is *not* using multiview to render to
+/// multiple layers simultaneously.
 ///
 /// @param gvr Pointer to the gvr instance from which to get the viewports.
 /// @param viewport_list Pointer to a previously allocated viewport list. This
@@ -731,7 +747,7 @@ extern "C" {
 }
 extern "C" {
     /// Queries whether a particular GVR feature is supported by the underlying
-/// platform.
+/// platform.  This should be called after gvr_initialize_gl().
 ///
 /// @param gvr The context to query against.
 /// @param feature The gvr_feature type being queried.
@@ -908,6 +924,15 @@ extern "C" {
                                                 reprojection: i32);
 }
 extern "C" {
+    /// Sets the layer in a multiview buffer from which the viewport should sample.
+///
+/// @param layer_index The layer in the array texture that distortion samples
+///     from.  Must be non-negative.  Defaults to 0.
+    pub fn gvr_buffer_viewport_set_source_layer(viewport:
+                                                    *mut gvr_buffer_viewport,
+                                                layer_index: i32);
+}
+extern "C" {
     /// Compares two gvr_buffer_viewport instances and returns true if they specify
 /// the same view mapping.
 ///
@@ -1036,6 +1061,18 @@ extern "C" {
                                                         i32);
 }
 extern "C" {
+    /// Sets the number of layers in a framebuffer backed by an array texture.
+///
+/// Default is 1, which means a non-layered texture will be created.
+/// Not all platforms support multiple layers, so clients can call
+/// gvr_is_feature_supported(GVR_FEATURE_MULTIVIEW) to check.
+///
+/// @param spec Buffer specification.
+/// @param num_layers The number of layers in the array texture.
+    pub fn gvr_buffer_spec_set_multiview_layers(spec: *mut gvr_buffer_spec,
+                                                num_layers: i32);
+}
+extern "C" {
     /// Creates a swap chain from the given buffer specifications.
 /// This is a potentially time-consuming operation. All frames within the
 /// swapchain will be allocated. Once rendering is stopped, call
@@ -1092,6 +1129,10 @@ extern "C" {
 /// the frame can then be bound with gvr_frame_bind_buffer(). Once the frame
 /// is finished and all its constituent buffers are ready, call
 /// gvr_frame_submit() to display it while applying lens distortion.
+///
+/// When this is called, the current thread's GL context must be the same
+/// context that was current when gvr_initialize_gl() was called, or at least be
+/// in a share group with the initialization context.
 ///
 /// @param swap_chain The swap chain.
 /// @return Handle to the acquired frame. NULL if the swap chain is invalid,
@@ -1311,7 +1352,7 @@ extern "C" {
 /// the given eye.
 ///
 /// @param gvr Pointer to the gvr instance from which to get the matrix.
-/// @param eye Selected gvr_eye type.
+/// @param eye Selected eye type.
 /// @return Transformation matrix from Head Space to selected Eye Space.
     pub fn gvr_get_eye_from_head_matrix(gvr: *const gvr_context, eye: i32)
      -> gvr_mat4f;
@@ -1397,7 +1438,7 @@ extern "C" {
 /// Calling this when already paused is a no-op.
 /// Thread-safe (call from any thread).
 ///
-/// @param api Pointer to a pointer to a gvr_controller_context.
+/// @param api Pointer to a gvr_controller_context.
     pub fn gvr_controller_pause(api: *mut gvr_controller_context);
 }
 extern "C" {
@@ -1405,7 +1446,7 @@ extern "C" {
 /// Calling this when already resumed is a no-op.
 /// Thread-safe (call from any thread).
 ///
-/// @param api Pointer to a pointer to a gvr_controller_context.
+/// @param api Pointer to a gvr_controller_context.
     pub fn gvr_controller_resume(api: *mut gvr_controller_context);
 }
 extern "C" {
@@ -1450,9 +1491,9 @@ extern "C" {
 /// const getter: it has side-effects. In particular, some of the
 /// gvr_controller_state fields (the ones documented as "transient") represent
 /// one-time events and will be true for only one read operation, and false
-/// in subsequente reads.
+/// in subsequent reads.
 ///
-/// @param api Pointer to a pointer to a gvr_controller_context.
+/// @param api Pointer to a gvr_controller_context.
 /// @param flags Optional flags reserved for future use. A value of 0 should be
 ///     used until corresponding flag attributes are defined and documented.
 /// @param out_state A pointer where the controller's state
@@ -1461,6 +1502,28 @@ extern "C" {
     pub fn gvr_controller_state_update(api: *mut gvr_controller_context,
                                        flags: i32,
                                        out_state: *mut gvr_controller_state);
+}
+extern "C" {
+    /// Sets up arm model with user's handedness, gaze behavior and head rotation.
+/// This setting needs to be applied for every frame. User preferences of
+/// handedness and gaze behavior can be changed as needed in a sequence of
+/// frames. This needs to be called before gvr_controller_state_update() to
+/// apply arm model. GVR_CONTROLLER_ENABLE_ARM_MODEL flag needs to be enabled
+/// to apply arm model.
+///
+/// @param api Pointer to a gvr_controller_context.
+/// @param handedness User's preferred handedness (GVR_CONTROLLER_RIGHT_HANDED
+///     or GVR_CONTROLLER_LEFT_HANDED). Arm model will assume this is the hand
+///     that is holding the controller and position the arm accordingly.
+/// @param behavior User's preferred gaze behavior (SYNC_GAZE / FOLLOW_GAZE
+///     / IGNORE_GAZE). Arm model uses this to determine how the body rotates as
+///     gaze direction (i.e. head rotation) changes.
+/// @param head_space_from_start_space_rotation User's head rotation with
+///     respect to start space.
+    pub fn gvr_controller_apply_arm_model(api: *mut gvr_controller_context,
+                                          handedness: i32, behavior: i32,
+                                          head_space_from_start_space_rotation:
+                                              gvr_mat4f);
 }
 extern "C" {
     /// Gets the API status of the controller state. Returns one of the
@@ -1506,8 +1569,8 @@ extern "C" {
 /// time due to controller/headset drift. A recentering operation will bring
 /// the two spaces back into sync.
 ///
-/// Remember that a quaternion expresses a rotation. Given a rotation of theta
-/// radians about the (x, y, z) axis, the corresponding quaternion (in
+/// Remember that a unit quaternion expresses a rotation. Given a rotation of
+/// theta radians about the (x, y, z) axis, the corresponding quaternion (in
 /// xyzw order) is:
 ///
 ///     (x * sin(theta/2), y * sin(theta/2), z * sin(theta/2), cos(theta/2))

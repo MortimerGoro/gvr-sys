@@ -18,7 +18,7 @@
 
 #include <stdint.h>
 
-#include "vr/gvr/capi/include/gvr_types.h"
+#include "gvr_types.h"
 
 #ifdef __cplusplus
 extern "C" {

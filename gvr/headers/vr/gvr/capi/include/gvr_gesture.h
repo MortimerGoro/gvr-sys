@@ -25,7 +25,7 @@
 #endif
 
 #include <stdint.h>
-#include "vr/gvr/capi/include/gvr_controller.h"
+#include "gvr_controller.h"
 
 #ifdef __cplusplus
 extern "C" {

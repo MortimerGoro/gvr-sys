@@ -8,10 +8,16 @@ pub struct gvr_context_ {
 /// Primary context for invoking Google VR APIs.
 pub type gvr_context = gvr_context_;
 #[repr(u32)]
+#[repr(C)]
 /// An enum for the left and right eye.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-pub enum gvr_eye { GVR_LEFT_EYE = 0, GVR_RIGHT_EYE = 1, GVR_NUM_EYES = 2, }
+pub enum gvr_eye {
+    GVR_LEFT_EYE = 0,
+    GVR_RIGHT_EYE = 1,
+    GVR_NUM_EYES = 2,
+}
 #[repr(u32)]
+#[repr(C)]
 /// The type of VR viewer.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_viewer_type {
@@ -19,6 +25,7 @@ pub enum gvr_viewer_type {
     GVR_VIEWER_TYPE_DAYDREAM = 1,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Types of VR-specific features which may or may not be supported on the
 /// underlying platform.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -27,10 +34,11 @@ pub enum gvr_feature {
     GVR_FEATURE_MULTIVIEW = 1,
     GVR_FEATURE_EXTERNAL_SURFACE = 2,
     GVR_FEATURE_HEAD_POSE_6DOF = 3,
+    GVR_FEATURE_HARDWARE_BUFFERS = 4,
 }
 /// Version information for the Google VR API.
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_version_ {
     pub major: i32,
     pub minor: i32,
@@ -38,60 +46,91 @@ pub struct gvr_version_ {
 }
 #[test]
 fn bindgen_test_layout_gvr_version_() {
-    assert_eq!(::std::mem::size_of::<gvr_version_>() , 12usize , concat ! (
-               "Size of: " , stringify ! ( gvr_version_ ) ));
-    assert_eq! (::std::mem::align_of::<gvr_version_>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_version_ ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_version_ ) ) . major as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_version_ ) , "::" ,
-                stringify ! ( major ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_version_ ) ) . minor as * const _ as
-                usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_version_ ) , "::" ,
-                stringify ! ( minor ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_version_ ) ) . patch as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_version_ ) , "::" ,
-                stringify ! ( patch ) ));
-}
-impl Clone for gvr_version_ {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_version_>(),
+        12usize,
+        concat!("Size of: ", stringify!(gvr_version_))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_version_>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_version_))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_version_>())).major as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_version_),
+            "::",
+            stringify!(major)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_version_>())).minor as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_version_),
+            "::",
+            stringify!(minor)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_version_>())).patch as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_version_),
+            "::",
+            stringify!(patch)
+        )
+    );
 }
 pub type gvr_version = gvr_version_;
 /// An integral 2D size. Used for render target sizes.
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_sizei {
     pub width: i32,
     pub height: i32,
 }
 #[test]
 fn bindgen_test_layout_gvr_sizei() {
-    assert_eq!(::std::mem::size_of::<gvr_sizei>() , 8usize , concat ! (
-               "Size of: " , stringify ! ( gvr_sizei ) ));
-    assert_eq! (::std::mem::align_of::<gvr_sizei>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_sizei ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_sizei ) ) . width as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_sizei ) , "::" ,
-                stringify ! ( width ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_sizei ) ) . height as * const _ as
-                usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_sizei ) , "::" ,
-                stringify ! ( height ) ));
-}
-impl Clone for gvr_sizei {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_sizei>(),
+        8usize,
+        concat!("Size of: ", stringify!(gvr_sizei))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_sizei>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_sizei))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_sizei>())).width as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_sizei),
+            "::",
+            stringify!(width)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_sizei>())).height as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_sizei),
+            "::",
+            stringify!(height)
+        )
+    );
 }
 /// An integral 2D rect. Used for window bounds in pixels.
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_recti {
     pub left: i32,
     pub right: i32,
@@ -100,39 +139,62 @@ pub struct gvr_recti {
 }
 #[test]
 fn bindgen_test_layout_gvr_recti() {
-    assert_eq!(::std::mem::size_of::<gvr_recti>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( gvr_recti ) ));
-    assert_eq! (::std::mem::align_of::<gvr_recti>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_recti ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_recti ) ) . left as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_recti ) , "::" ,
-                stringify ! ( left ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_recti ) ) . right as * const _ as
-                usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_recti ) , "::" ,
-                stringify ! ( right ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_recti ) ) . bottom as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_recti ) , "::" ,
-                stringify ! ( bottom ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_recti ) ) . top as * const _ as usize
-                } , 12usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_recti ) , "::" ,
-                stringify ! ( top ) ));
-}
-impl Clone for gvr_recti {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_recti>(),
+        16usize,
+        concat!("Size of: ", stringify!(gvr_recti))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_recti>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_recti))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_recti>())).left as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_recti),
+            "::",
+            stringify!(left)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_recti>())).right as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_recti),
+            "::",
+            stringify!(right)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_recti>())).bottom as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_recti),
+            "::",
+            stringify!(bottom)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_recti>())).top as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_recti),
+            "::",
+            stringify!(top)
+        )
+    );
 }
 /// A floating point 2D rect. Used for field of view, and also for ranges
 /// in texture space. When used for a field of view, all angles are in positive
 /// degrees from the optical axis.
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_rectf {
     pub left: f32,
     pub right: f32,
@@ -141,64 +203,100 @@ pub struct gvr_rectf {
 }
 #[test]
 fn bindgen_test_layout_gvr_rectf() {
-    assert_eq!(::std::mem::size_of::<gvr_rectf>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( gvr_rectf ) ));
-    assert_eq! (::std::mem::align_of::<gvr_rectf>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_rectf ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_rectf ) ) . left as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_rectf ) , "::" ,
-                stringify ! ( left ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_rectf ) ) . right as * const _ as
-                usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_rectf ) , "::" ,
-                stringify ! ( right ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_rectf ) ) . bottom as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_rectf ) , "::" ,
-                stringify ! ( bottom ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_rectf ) ) . top as * const _ as usize
-                } , 12usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_rectf ) , "::" ,
-                stringify ! ( top ) ));
-}
-impl Clone for gvr_rectf {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_rectf>(),
+        16usize,
+        concat!("Size of: ", stringify!(gvr_rectf))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_rectf>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_rectf))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_rectf>())).left as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_rectf),
+            "::",
+            stringify!(left)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_rectf>())).right as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_rectf),
+            "::",
+            stringify!(right)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_rectf>())).bottom as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_rectf),
+            "::",
+            stringify!(bottom)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_rectf>())).top as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_rectf),
+            "::",
+            stringify!(top)
+        )
+    );
 }
 /// A floating point 2D vector.
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_vec2f {
     pub x: f32,
     pub y: f32,
 }
 #[test]
 fn bindgen_test_layout_gvr_vec2f() {
-    assert_eq!(::std::mem::size_of::<gvr_vec2f>() , 8usize , concat ! (
-               "Size of: " , stringify ! ( gvr_vec2f ) ));
-    assert_eq! (::std::mem::align_of::<gvr_vec2f>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_vec2f ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_vec2f ) ) . x as * const _ as usize }
-                , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_vec2f ) , "::" ,
-                stringify ! ( x ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_vec2f ) ) . y as * const _ as usize }
-                , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_vec2f ) , "::" ,
-                stringify ! ( y ) ));
-}
-impl Clone for gvr_vec2f {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_vec2f>(),
+        8usize,
+        concat!("Size of: ", stringify!(gvr_vec2f))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_vec2f>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_vec2f))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_vec2f>())).x as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_vec2f),
+            "::",
+            stringify!(x)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_vec2f>())).y as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_vec2f),
+            "::",
+            stringify!(y)
+        )
+    );
 }
 /// A floating point 3D vector.
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_vec3f {
     pub x: f32,
     pub y: f32,
@@ -206,57 +304,83 @@ pub struct gvr_vec3f {
 }
 #[test]
 fn bindgen_test_layout_gvr_vec3f() {
-    assert_eq!(::std::mem::size_of::<gvr_vec3f>() , 12usize , concat ! (
-               "Size of: " , stringify ! ( gvr_vec3f ) ));
-    assert_eq! (::std::mem::align_of::<gvr_vec3f>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_vec3f ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_vec3f ) ) . x as * const _ as usize }
-                , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_vec3f ) , "::" ,
-                stringify ! ( x ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_vec3f ) ) . y as * const _ as usize }
-                , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_vec3f ) , "::" ,
-                stringify ! ( y ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_vec3f ) ) . z as * const _ as usize }
-                , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_vec3f ) , "::" ,
-                stringify ! ( z ) ));
-}
-impl Clone for gvr_vec3f {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_vec3f>(),
+        12usize,
+        concat!("Size of: ", stringify!(gvr_vec3f))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_vec3f>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_vec3f))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_vec3f>())).x as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_vec3f),
+            "::",
+            stringify!(x)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_vec3f>())).y as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_vec3f),
+            "::",
+            stringify!(y)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_vec3f>())).z as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_vec3f),
+            "::",
+            stringify!(z)
+        )
+    );
 }
 /// A floating point 4x4 matrix stored in row-major form. It needs to be
 /// transposed before being used with OpenGL.
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_mat4f {
     pub m: [[f32; 4usize]; 4usize],
 }
 #[test]
 fn bindgen_test_layout_gvr_mat4f() {
-    assert_eq!(::std::mem::size_of::<gvr_mat4f>() , 64usize , concat ! (
-               "Size of: " , stringify ! ( gvr_mat4f ) ));
-    assert_eq! (::std::mem::align_of::<gvr_mat4f>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_mat4f ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_mat4f ) ) . m as * const _ as usize }
-                , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_mat4f ) , "::" ,
-                stringify ! ( m ) ));
-}
-impl Clone for gvr_mat4f {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_mat4f>(),
+        64usize,
+        concat!("Size of: ", stringify!(gvr_mat4f))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_mat4f>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_mat4f))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_mat4f>())).m as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_mat4f),
+            "::",
+            stringify!(m)
+        )
+    );
 }
 /// A floating point quaternion, in JPL format.
 /// We use this simple struct in order not to impose a dependency on a
 /// particular math library. The user of this API is free to encapsulate this
 /// into any math library they want.
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_quatf {
     /// qx, qy, qz are the vector components.
     pub qx: f32,
@@ -267,59 +391,91 @@ pub struct gvr_quatf {
 }
 #[test]
 fn bindgen_test_layout_gvr_quatf() {
-    assert_eq!(::std::mem::size_of::<gvr_quatf>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( gvr_quatf ) ));
-    assert_eq! (::std::mem::align_of::<gvr_quatf>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_quatf ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_quatf ) ) . qx as * const _ as usize
-                } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_quatf ) , "::" ,
-                stringify ! ( qx ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_quatf ) ) . qy as * const _ as usize
-                } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_quatf ) , "::" ,
-                stringify ! ( qy ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_quatf ) ) . qz as * const _ as usize
-                } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_quatf ) , "::" ,
-                stringify ! ( qz ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_quatf ) ) . qw as * const _ as usize
-                } , 12usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_quatf ) , "::" ,
-                stringify ! ( qw ) ));
-}
-impl Clone for gvr_quatf {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_quatf>(),
+        16usize,
+        concat!("Size of: ", stringify!(gvr_quatf))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_quatf>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_quatf))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_quatf>())).qx as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_quatf),
+            "::",
+            stringify!(qx)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_quatf>())).qy as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_quatf),
+            "::",
+            stringify!(qy)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_quatf>())).qz as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_quatf),
+            "::",
+            stringify!(qz)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_quatf>())).qw as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_quatf),
+            "::",
+            stringify!(qw)
+        )
+    );
 }
 /// A *monotonic system time* representation. On Android, this is equivalent to
 /// System.nanoTime(), or clock_gettime(CLOCK_MONOTONIC). If there is any doubt
 /// about how to get the current time for the current platform, simply use
 /// gvr_get_time_point_now().
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_clock_time_point {
     pub monotonic_system_time_nanos: i64,
 }
 #[test]
 fn bindgen_test_layout_gvr_clock_time_point() {
-    assert_eq!(::std::mem::size_of::<gvr_clock_time_point>() , 8usize , concat
-               ! ( "Size of: " , stringify ! ( gvr_clock_time_point ) ));
-    assert_eq! (::std::mem::align_of::<gvr_clock_time_point>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( gvr_clock_time_point ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_clock_time_point ) ) .
-                monotonic_system_time_nanos as * const _ as usize } , 0usize ,
-                concat ! (
-                "Alignment of field: " , stringify ! ( gvr_clock_time_point )
-                , "::" , stringify ! ( monotonic_system_time_nanos ) ));
-}
-impl Clone for gvr_clock_time_point {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_clock_time_point>(),
+        8usize,
+        concat!("Size of: ", stringify!(gvr_clock_time_point))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_clock_time_point>(),
+        8usize,
+        concat!("Alignment of ", stringify!(gvr_clock_time_point))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<gvr_clock_time_point>())).monotonic_system_time_nanos as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_clock_time_point),
+            "::",
+            stringify!(monotonic_system_time_nanos)
+        )
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -382,6 +538,8 @@ pub struct gvr_frame_ {
 pub type gvr_frame = gvr_frame_;
 /// Generic flag type.
 pub type gvr_flags = u32;
+/// Generic 64-bit flag type.
+pub type gvr_flags64 = u64;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct gvr_properties_ {
@@ -389,20 +547,31 @@ pub struct gvr_properties_ {
 }
 /// Opaque handle to a collection of properties.
 pub type gvr_properties = gvr_properties_;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct gvr_controller_context_ {
+    _unused: [u8; 0],
+}
+/// Represents a Daydream Controller API object, used to invoke the
+/// Daydream Controller API.
+pub type gvr_controller_context = gvr_controller_context_;
 /// A generic container for various pure value types.
 #[repr(C)]
+#[derive(Copy, Clone)]
 pub struct gvr_value {
     pub value_type: i32,
     pub flags: gvr_flags,
     pub __bindgen_anon_1: gvr_value__bindgen_ty_1,
 }
 #[repr(C)]
+#[derive(Copy, Clone)]
 pub union gvr_value__bindgen_ty_1 {
     pub f: f32,
     pub d: f64,
     pub i: i32,
     pub i64: i64,
     pub fl: gvr_flags,
+    pub fl64: gvr_flags64,
     pub si: gvr_sizei,
     pub ri: gvr_recti,
     pub rf: gvr_rectf,
@@ -412,104 +581,206 @@ pub union gvr_value__bindgen_ty_1 {
     pub m4f: gvr_mat4f,
     pub t: gvr_clock_time_point,
     pub padding: [u8; 248usize],
+    _bindgen_union_align: [u64; 31usize],
 }
 #[test]
 fn bindgen_test_layout_gvr_value__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<gvr_value__bindgen_ty_1>() , 248usize ,
-               concat ! (
-               "Size of: " , stringify ! ( gvr_value__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<gvr_value__bindgen_ty_1>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( gvr_value__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . f as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( f ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . d as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( d ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . i as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( i ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . i64 as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( i64 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . fl as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( fl ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . si as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( si ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . ri as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( ri ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . rf as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( rf ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . v2f as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( v2f ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . v3f as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( v3f ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . qf as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( qf ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . m4f as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( m4f ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . t as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value__bindgen_ty_1 ) ) . padding as
-                * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value__bindgen_ty_1
-                ) , "::" , stringify ! ( padding ) ));
+    assert_eq!(
+        ::std::mem::size_of::<gvr_value__bindgen_ty_1>(),
+        248usize,
+        concat!("Size of: ", stringify!(gvr_value__bindgen_ty_1))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_value__bindgen_ty_1>(),
+        8usize,
+        concat!("Alignment of ", stringify!(gvr_value__bindgen_ty_1))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).f as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(f)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).d as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(d)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).i as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(i)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).i64 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(i64)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).fl as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(fl)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).fl64 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(fl64)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).si as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(si)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).ri as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(ri)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).rf as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(rf)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).v2f as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(v2f)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).v3f as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(v3f)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).qf as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(qf)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).m4f as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(m4f)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).t as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(t)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value__bindgen_ty_1>())).padding as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value__bindgen_ty_1),
+            "::",
+            stringify!(padding)
+        )
+    );
 }
 #[test]
 fn bindgen_test_layout_gvr_value() {
-    assert_eq!(::std::mem::size_of::<gvr_value>() , 256usize , concat ! (
-               "Size of: " , stringify ! ( gvr_value ) ));
-    assert_eq! (::std::mem::align_of::<gvr_value>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_value ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value ) ) . value_type as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value ) , "::" ,
-                stringify ! ( value_type ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_value ) ) . flags as * const _ as
-                usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_value ) , "::" ,
-                stringify ! ( flags ) ));
+    assert_eq!(
+        ::std::mem::size_of::<gvr_value>(),
+        256usize,
+        concat!("Size of: ", stringify!(gvr_value))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_value>(),
+        8usize,
+        concat!("Alignment of ", stringify!(gvr_value))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value>())).value_type as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value),
+            "::",
+            stringify!(value_type)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_value>())).flags as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_value),
+            "::",
+            stringify!(flags)
+        )
+    );
 }
 #[repr(u32)]
+#[repr(C)]
 /// The type of a recentering associated with a GVR_EVENT_RECENTER event.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_recenter_event_type {
@@ -520,44 +791,69 @@ pub enum gvr_recenter_event_type {
 /// Event data associated with a system-initiated GVR_EVENT_RECENTER event. The
 /// client may wish to handle this event to provide custom recentering logic.
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct gvr_recenter_event_data {
     pub recenter_type: i32,
     pub recenter_event_flags: gvr_flags,
+    /// The new transform that maps from "sensor" space to the recentered "start"
+    /// /// space. This transform can also be retrieved by querying for the
+    /// /// GVR_PROPERTY_RECENTER_TRANSFORM property.
     pub start_space_from_tracking_space_transform: gvr_mat4f,
 }
 #[test]
 fn bindgen_test_layout_gvr_recenter_event_data() {
-    assert_eq!(::std::mem::size_of::<gvr_recenter_event_data>() , 72usize ,
-               concat ! (
-               "Size of: " , stringify ! ( gvr_recenter_event_data ) ));
-    assert_eq! (::std::mem::align_of::<gvr_recenter_event_data>() , 4usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( gvr_recenter_event_data ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_recenter_event_data ) ) .
-                recenter_type as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_recenter_event_data
-                ) , "::" , stringify ! ( recenter_type ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_recenter_event_data ) ) .
-                recenter_event_flags as * const _ as usize } , 4usize , concat
-                ! (
-                "Alignment of field: " , stringify ! ( gvr_recenter_event_data
-                ) , "::" , stringify ! ( recenter_event_flags ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_recenter_event_data ) ) .
-                start_space_from_tracking_space_transform as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_recenter_event_data
-                ) , "::" , stringify ! (
-                start_space_from_tracking_space_transform ) ));
-}
-impl Clone for gvr_recenter_event_data {
-    fn clone(&self) -> Self { *self }
+    assert_eq!(
+        ::std::mem::size_of::<gvr_recenter_event_data>(),
+        72usize,
+        concat!("Size of: ", stringify!(gvr_recenter_event_data))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_recenter_event_data>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_recenter_event_data))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<gvr_recenter_event_data>())).recenter_type as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_recenter_event_data),
+            "::",
+            stringify!(recenter_type)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<gvr_recenter_event_data>())).recenter_event_flags as *const _
+                as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_recenter_event_data),
+            "::",
+            stringify!(recenter_event_flags)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<gvr_recenter_event_data>()))
+                .start_space_from_tracking_space_transform as *const _ as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_recenter_event_data),
+            "::",
+            stringify!(start_space_from_tracking_space_transform)
+        )
+    );
 }
 /// Container for various GVR-events to which the client can optionally respond.
 #[repr(C)]
+#[derive(Copy, Clone)]
 pub struct gvr_event {
     pub timestamp: gvr_clock_time_point,
     pub type_: i32,
@@ -565,53 +861,93 @@ pub struct gvr_event {
     pub __bindgen_anon_1: gvr_event__bindgen_ty_1,
 }
 #[repr(C)]
+#[derive(Copy, Clone)]
 pub union gvr_event__bindgen_ty_1 {
     pub recenter_event_data: gvr_recenter_event_data,
     pub padding: [u8; 496usize],
+    _bindgen_union_align: [u32; 124usize],
 }
 #[test]
 fn bindgen_test_layout_gvr_event__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<gvr_event__bindgen_ty_1>() , 496usize ,
-               concat ! (
-               "Size of: " , stringify ! ( gvr_event__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<gvr_event__bindgen_ty_1>() , 4usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( gvr_event__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_event__bindgen_ty_1 ) ) .
-                recenter_event_data as * const _ as usize } , 0usize , concat
-                ! (
-                "Alignment of field: " , stringify ! ( gvr_event__bindgen_ty_1
-                ) , "::" , stringify ! ( recenter_event_data ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_event__bindgen_ty_1 ) ) . padding as
-                * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_event__bindgen_ty_1
-                ) , "::" , stringify ! ( padding ) ));
+    assert_eq!(
+        ::std::mem::size_of::<gvr_event__bindgen_ty_1>(),
+        496usize,
+        concat!("Size of: ", stringify!(gvr_event__bindgen_ty_1))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_event__bindgen_ty_1>(),
+        4usize,
+        concat!("Alignment of ", stringify!(gvr_event__bindgen_ty_1))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<gvr_event__bindgen_ty_1>())).recenter_event_data as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_event__bindgen_ty_1),
+            "::",
+            stringify!(recenter_event_data)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_event__bindgen_ty_1>())).padding as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_event__bindgen_ty_1),
+            "::",
+            stringify!(padding)
+        )
+    );
 }
 #[test]
 fn bindgen_test_layout_gvr_event() {
-    assert_eq!(::std::mem::size_of::<gvr_event>() , 512usize , concat ! (
-               "Size of: " , stringify ! ( gvr_event ) ));
-    assert_eq! (::std::mem::align_of::<gvr_event>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( gvr_event ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_event ) ) . timestamp as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_event ) , "::" ,
-                stringify ! ( timestamp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_event ) ) . type_ as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_event ) , "::" ,
-                stringify ! ( type_ ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const gvr_event ) ) . flags as * const _ as
-                usize } , 12usize , concat ! (
-                "Alignment of field: " , stringify ! ( gvr_event ) , "::" ,
-                stringify ! ( flags ) ));
+    assert_eq!(
+        ::std::mem::size_of::<gvr_event>(),
+        512usize,
+        concat!("Size of: ", stringify!(gvr_event))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<gvr_event>(),
+        8usize,
+        concat!("Alignment of ", stringify!(gvr_event))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_event>())).timestamp as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_event),
+            "::",
+            stringify!(timestamp)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_event>())).type_ as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_event),
+            "::",
+            stringify!(type_)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<gvr_event>())).flags as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(gvr_event),
+            "::",
+            stringify!(flags)
+        )
+    );
 }
 #[repr(u32)]
+#[repr(C)]
 /// Constants that represent GVR error codes.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_error {
@@ -622,6 +958,7 @@ pub enum gvr_error {
     GVR_ERROR_NO_PROPERTY_AVAILABLE = 1000001,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Constants that represent the status of the controller API.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_api_status {
@@ -634,6 +971,7 @@ pub enum gvr_controller_api_status {
     GVR_CONTROLLER_API_MALFUNCTION = 6,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Constants that represent the state of the controller.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_connection_state {
@@ -643,6 +981,7 @@ pub enum gvr_controller_connection_state {
     GVR_CONTROLLER_CONNECTED = 3,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Controller buttons.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_button {
@@ -655,6 +994,7 @@ pub enum gvr_controller_button {
     GVR_CONTROLLER_BUTTON_COUNT = 6,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Controller battery states.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_battery_level {
@@ -674,6 +1014,7 @@ pub struct gvr_controller_state_ {
 /// Opaque handle to controller state.
 pub type gvr_controller_state = gvr_controller_state_;
 #[repr(u32)]
+#[repr(C)]
 /// Rendering modes define CPU load / rendering quality balances.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_audio_rendering_mode {
@@ -682,6 +1023,7 @@ pub enum gvr_audio_rendering_mode {
     GVR_AUDIO_RENDERING_BINAURAL_HIGH_QUALITY = 2,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Room surface material names, used to set room properties.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_audio_material_type {
@@ -710,6 +1052,7 @@ pub enum gvr_audio_material_type {
     GVR_AUDIO_MATERIAL_WOOD_PANEL = 22,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Distance rolloff models used for distance attenuation.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_audio_distance_rolloff_type {
@@ -720,6 +1063,7 @@ pub enum gvr_audio_distance_rolloff_type {
 /// Sound object and sound field identifier.
 pub type gvr_audio_source_id = i32;
 #[repr(u32)]
+#[repr(C)]
 /// Supported surround sound formats.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_audio_surround_format_type {
@@ -727,17 +1071,16 @@ pub enum gvr_audio_surround_format_type {
     GVR_AUDIO_SURROUND_FORMAT_SURROUND_MONO = 1,
     GVR_AUDIO_SURROUND_FORMAT_SURROUND_STEREO = 2,
     GVR_AUDIO_SURROUND_FORMAT_SURROUND_FIVE_DOT_ONE = 3,
+    GVR_AUDIO_SURROUND_FORMAT_SURROUND_SEVEN_DOT_ONE = 10,
     GVR_AUDIO_SURROUND_FORMAT_FIRST_ORDER_AMBISONICS = 4,
     GVR_AUDIO_SURROUND_FORMAT_SECOND_ORDER_AMBISONICS = 5,
     GVR_AUDIO_SURROUND_FORMAT_THIRD_ORDER_AMBISONICS = 6,
-    GVR_AUDIO_SURROUND_FORMAT_FIRST_ORDER_AMBISONICS_WITH_NON_DIEGETIC_STEREO
-        = 7,
-    GVR_AUDIO_SURROUND_FORMAT_SECOND_ORDER_AMBISONICS_WITH_NON_DIEGETIC_STEREO
-        = 8,
-    GVR_AUDIO_SURROUND_FORMAT_THIRD_ORDER_AMBISONICS_WITH_NON_DIEGETIC_STEREO
-        = 9,
+    GVR_AUDIO_SURROUND_FORMAT_FIRST_ORDER_AMBISONICS_WITH_NON_DIEGETIC_STEREO = 7,
+    GVR_AUDIO_SURROUND_FORMAT_SECOND_ORDER_AMBISONICS_WITH_NON_DIEGETIC_STEREO = 8,
+    GVR_AUDIO_SURROUND_FORMAT_THIRD_ORDER_AMBISONICS_WITH_NON_DIEGETIC_STEREO = 9,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Valid color formats for swap chain buffers.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_color_format_type {
@@ -745,6 +1088,7 @@ pub enum gvr_color_format_type {
     GVR_COLOR_FORMAT_RGB_565 = 1,
 }
 #[repr(u32)]
+#[repr(C)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_depth_stencil_format_type {
     GVR_DEPTH_STENCIL_FORMAT_NONE = 255,
@@ -756,6 +1100,7 @@ pub enum gvr_depth_stencil_format_type {
     GVR_DEPTH_STENCIL_FORMAT_STENCIL_8 = 5,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Types of asynchronous reprojection.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_reprojection {
@@ -763,12 +1108,14 @@ pub enum gvr_reprojection {
     GVR_REPROJECTION_FULL = 1,
 }
 #[repr(u32)]
+#[repr(C)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_handedness {
     GVR_CONTROLLER_RIGHT_HANDED = 0,
     GVR_CONTROLLER_LEFT_HANDED = 1,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Types of gaze behaviors used for arm model.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_arm_model_behavior {
@@ -783,6 +1130,7 @@ pub struct gvr_user_prefs_ {
 }
 pub type gvr_user_prefs = gvr_user_prefs_;
 #[repr(u32)]
+#[repr(C)]
 /// Property types exposed by the gvr_properties_get() API.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_property_type {
@@ -794,12 +1142,15 @@ pub enum gvr_property_type {
     GVR_PROPERTY_TRACKING_STATUS = 6,
 }
 #[repr(u32)]
+#[repr(C)]
+/// Safety region types exposed from the GVR_PROPERTY_SAFETY_REGION property.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_safety_region_type {
     GVR_SAFETY_REGION_NONE = 0,
     GVR_SAFETY_REGION_CYLINDER = 1,
 }
 #[repr(u32)]
+#[repr(C)]
 /// Value types for the contents of a gvr_value object instance.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_value_type {
@@ -819,6 +1170,7 @@ pub enum gvr_value_type {
     GVR_VALUE_TYPE_CLOCK_TIME_POINT = 13,
 }
 #[repr(u32)]
+#[repr(C)]
 /// The type of gvr_event.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_event_type {
@@ -828,1477 +1180,1585 @@ pub enum gvr_event_type {
     GVR_EVENT_HEAD_TRACKING_RESUMED = 4,
     GVR_EVENT_HEAD_TRACKING_PAUSED = 5,
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AHardwareBuffer {
+    _unused: [u8; 0],
+}
 extern "C" {
+
     /// @return Pointer to the created gvr instance, NULL on failure.
     pub fn gvr_create() -> *mut gvr_context;
 }
 extern "C" {
+
     /// Gets the current GVR runtime version.
-///
-/// Note: This runtime version may differ from the version against which the
-/// client app is compiled, as defined by the semantic version components in
-/// gvr_version.h.
-///
-/// @return The version as a gvr_version.
+    ///
+    /// Note: This runtime version may differ from the version against which the
+    /// client app is compiled, as defined by the semantic version components in
+    /// gvr_version.h.
+    ///
+    /// @return The version as a gvr_version.
     pub fn gvr_get_version() -> gvr_version;
 }
 extern "C" {
+
     /// Gets a string representation of the current GVR runtime version. This is of
-/// the form "MAJOR.MINOR.PATCH".
-///
-/// Note: This runtime version may differ from the version against which the
-/// client app is compiled, as defined in gvr_version.h by
-/// GVR_SDK_VERSION_STRING.
-///
-/// @return The version as a static char pointer.
+    /// the form "MAJOR.MINOR.PATCH".
+    ///
+    /// Note: This runtime version may differ from the version against which the
+    /// client app is compiled, as defined in gvr_version.h by
+    /// GVR_SDK_VERSION_STRING.
+    ///
+    /// @return The version as a static char pointer.
     pub fn gvr_get_version_string() -> *const ::std::os::raw::c_char;
 }
 extern "C" {
+
     /// Gets the current GVR error code, or GVR_ERROR_NONE if there is no error.
-/// This function doesn't clear the error code; see gvr_clear_error().
-///
-/// @param gvr Pointer to the gvr instance.
-/// @return The current gvr_error code, or GVR_ERROR_NONE if no error has
-///    occurred.
+    /// This function doesn't clear the error code; see gvr_clear_error().
+    ///
+    /// @param gvr Pointer to the gvr instance.
+    /// @return The current gvr_error code, or GVR_ERROR_NONE if no error has
+    /// occurred.
     pub fn gvr_get_error(gvr: *mut gvr_context) -> i32;
 }
 extern "C" {
+
     /// Clears the current GVR error code, and returns the error code that was
-/// cleared.
-///
-/// @param gvr Pointer to the gvr instance.
-/// @return The gvr_error code that was cleared by this function, or
-/// GVR_ERROR_NONE if no error has occurred.
+    /// cleared.
+    ///
+    /// @param gvr Pointer to the gvr instance.
+    /// @return The gvr_error code that was cleared by this function, or
+    /// GVR_ERROR_NONE if no error has occurred.
     pub fn gvr_clear_error(gvr: *mut gvr_context) -> i32;
 }
 extern "C" {
+
     /// Gets a human-readable string representing the given error code.
-///
-/// @param error_code The gvr_error code.
-/// @return A human-readable string representing the error code.
-    pub fn gvr_get_error_string(error_code: i32)
-     -> *const ::std::os::raw::c_char;
+    ///
+    /// @param error_code The gvr_error code.
+    /// @return A human-readable string representing the error code.
+    pub fn gvr_get_error_string(error_code: i32) -> *const ::std::os::raw::c_char;
 }
 extern "C" {
+
     /// Polls the event queue, populating the provided event if available while also
-/// popping it from the event queue.
-///
-/// Note that it is the caller's responsibility for querying the event queue
-/// in a timely fashion, as it will otherwise be flushed periodically.
-///
-/// @param gvr_context The current context.
-/// @param event_out The event to populate. This will be populated with a valid
-///     gvr_event iff the result is GVR_NO_ERROR.
-/// @return GVR_ERROR_NONE if an event was available, otherwise
-///     GVR_ERROR_NO_EVENT_AVAILABLE.
-    pub fn gvr_poll_event(gvr: *mut gvr_context, event_out: *mut gvr_event)
-     -> i32;
+    /// popping it from the event queue.
+    ///
+    /// Note that it is the caller's responsibility for querying the event queue
+    /// in a timely fashion, as it will otherwise be flushed periodically.
+    ///
+    /// @param gvr_context The current context.
+    /// @param event_out The event to populate. This will be populated with a valid
+    /// gvr_event iff the result is GVR_NO_ERROR.
+    /// @return GVR_ERROR_NONE if an event was available, otherwise
+    /// GVR_ERROR_NO_EVENT_AVAILABLE.
+    pub fn gvr_poll_event(gvr: *mut gvr_context, event_out: *mut gvr_event) -> i32;
 }
 extern "C" {
+
     /// Gets a read-only handle to the current global set of GVR-related properties.
-///
-/// @param gvr_context The current context.
-/// @return gvr_properties An opaque handle to the current, global properties
-///     instance. Note that this handle is valid only as long as the provided
-///     context is valid, and must not be used after the context is destroyed.
-    pub fn gvr_get_current_properties(gvr: *mut gvr_context)
-     -> *const gvr_properties;
+    ///
+    /// @param gvr_context The current context.
+    /// @return gvr_properties An opaque handle to the current, global properties
+    /// instance. Note that this handle is valid only as long as the provided
+    /// context is valid, and must not be used after the context is destroyed.
+    pub fn gvr_get_current_properties(gvr: *mut gvr_context) -> *const gvr_properties;
 }
 extern "C" {
+
     /// Queries the given property's value, populating the provided value if
-/// available.
-///
-/// @param gvr_properties The set of properties to query.
-/// @param property_key The property being queried.
-/// @return GVR_ERROR_NONE if the property was available, otherwise
-///     GVR_ERROR_NO_PROPERTY_AVAILABLE.
-    pub fn gvr_properties_get(properties: *const gvr_properties,
-                              property_key: i32, value_out: *mut gvr_value)
-     -> i32;
+    /// available.
+    ///
+    /// @param gvr_properties The set of properties to query.
+    /// @param property_key The property being queried.
+    /// @return GVR_ERROR_NONE if the property was available, otherwise
+    /// GVR_ERROR_NO_PROPERTY_AVAILABLE.
+    pub fn gvr_properties_get(
+        properties: *const gvr_properties,
+        property_key: i32,
+        value_out: *mut gvr_value,
+    ) -> i32;
 }
 extern "C" {
+
     /// Returns an opaque struct containing information about user preferences.
-///
-/// The returned struct will remain valid as long as the context is valid.
-/// The returned struct may be updated when the user changes their preferences,
-/// so this function only needs to be called once, and calling it multiple
-/// times will return the same object each time.
-///
-/// @param gvr Pointer to the gvr instance.
-/// @return An opaque struct containing information about user preferences.
+    ///
+    /// The returned struct will remain valid as long as the context is valid.
+    /// The returned struct may be updated when the user changes their preferences,
+    /// so this function only needs to be called once, and calling it multiple
+    /// times will return the same object each time.
+    ///
+    /// @param gvr Pointer to the gvr instance.
+    /// @return An opaque struct containing information about user preferences.
     pub fn gvr_get_user_prefs(gvr: *mut gvr_context) -> *const gvr_user_prefs;
 }
 extern "C" {
+
     /// Returns the controller handedness of the given gvr_user_prefs struct.
-///
-/// @param user_prefs Pointer to the gvr_user_prefs object returned by
-///     gvr_get_user_prefs.
-/// @return Either GVR_CONTROLLER_RIGHT_HANDED or GVR_CONTROLLER_LEFT_HANDED
-///     depending on which hand the user holds the controller in.
-    pub fn gvr_user_prefs_get_controller_handedness(user_prefs:
-                                                        *const gvr_user_prefs)
-     -> i32;
+    ///
+    /// @param user_prefs Pointer to the gvr_user_prefs object returned by
+    /// gvr_get_user_prefs.
+    /// @return Either GVR_CONTROLLER_RIGHT_HANDED or GVR_CONTROLLER_LEFT_HANDED
+    /// depending on which hand the user holds the controller in.
+    pub fn gvr_user_prefs_get_controller_handedness(user_prefs: *const gvr_user_prefs) -> i32;
 }
 extern "C" {
+
     /// Destroys a gvr_context instance.  The parameter will be nulled by this
-/// operation.  Once this function is called, the behavior of any subsequent
-/// call to a GVR SDK function that references objects created from this
-/// context is undefined.
-///
-/// @param gvr Pointer to a pointer to the gvr instance to be destroyed and
-///     nulled.
+    /// operation.  Once this function is called, the behavior of any subsequent
+    /// call to a GVR SDK function that references objects created from this
+    /// context is undefined.
+    ///
+    /// @param gvr Pointer to a pointer to the gvr instance to be destroyed and
+    /// nulled.
     pub fn gvr_destroy(gvr: *mut *mut gvr_context);
 }
 extern "C" {
+
     /// Initializes necessary GL-related objects and uses the current thread and
-/// GL context for rendering. Please make sure that a valid GL context is
-/// available when this function is called.
-///
-/// @param gvr Pointer to the gvr instance to be initialized.
+    /// GL context for rendering. Please make sure that a valid GL context is
+    /// available when this function is called.
+    ///
+    /// @param gvr Pointer to the gvr instance to be initialized.
     pub fn gvr_initialize_gl(gvr: *mut gvr_context);
 }
 extern "C" {
+
     /// Gets whether asynchronous reprojection is currently enabled.
-///
-/// If enabled, frames will be collected by the rendering system and
-/// asynchronously re-projected in sync with the scanout of the display. This
-/// feature may not be available on every platform, and requires a
-/// high-priority render thread with special extensions to function properly.
-///
-/// Note: On Android, this feature can be enabled solely via the GvrLayout Java
-/// instance which (indirectly) owns this gvr_context. The corresponding
-/// method call is GvrLayout.setAsyncReprojectionEnabled().
-///
-/// Note: Because of the above requirements, asynchronous reprojection is only
-/// currently available on Daydream-ready Android devices.  This function will
-/// always return false on other devices.
-///
-/// @param gvr Pointer to the gvr instance.
-/// @return Whether async reprojection is enabled. Defaults to false.
-    pub fn gvr_get_async_reprojection_enabled(gvr: *const gvr_context)
-     -> bool;
+    ///
+    /// If enabled, frames will be collected by the rendering system and
+    /// asynchronously re-projected in sync with the scanout of the display. This
+    /// feature may not be available on every platform, and requires a
+    /// high-priority render thread with special extensions to function properly.
+    ///
+    /// Note: On Android, this feature can be enabled solely via the GvrLayout Java
+    /// instance which (indirectly) owns this gvr_context. The corresponding
+    /// method call is GvrLayout.setAsyncReprojectionEnabled().
+    ///
+    /// Note: Because of the above requirements, asynchronous reprojection is only
+    /// currently available on Daydream-ready Android devices.  This function will
+    /// always return false on other devices.
+    ///
+    /// @param gvr Pointer to the gvr instance.
+    /// @return Whether async reprojection is enabled. Defaults to false.
+    pub fn gvr_get_async_reprojection_enabled(gvr: *const gvr_context) -> bool;
 }
 extern "C" {
+
     /// Gets the recommended buffer viewport configuration, populating a previously
-/// allocated gvr_buffer_viewport_list object. The updated values include the
-/// per-eye recommended viewport and field of view for the target.
-///
-/// When the recommended viewports are used for distortion rendering, this
-/// method should always be called after calling refresh_viewer_profile(). That
-/// will ensure that the populated viewports reflect the currently paired
-/// viewer.
-///
-/// This function assumes that the client is *not* using multiview to render to
-/// multiple layers simultaneously.
-///
-/// @param gvr Pointer to the gvr instance from which to get the viewports.
-/// @param viewport_list Pointer to a previously allocated viewport list. This
-///     will be populated with the recommended buffer viewports and resized if
-///     necessary.
-    pub fn gvr_get_recommended_buffer_viewports(gvr: *const gvr_context,
-                                                viewport_list:
-                                                    *mut gvr_buffer_viewport_list);
+    /// allocated gvr_buffer_viewport_list object. The updated values include the
+    /// per-eye recommended viewport and field of view for the target.
+    ///
+    /// When the recommended viewports are used for distortion rendering, this
+    /// method should always be called after calling refresh_viewer_profile(). That
+    /// will ensure that the populated viewports reflect the currently paired
+    /// viewer.
+    ///
+    /// This function assumes that the client is *not* using multiview to render to
+    /// multiple layers simultaneously.
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the viewports.
+    /// @param viewport_list Pointer to a previously allocated viewport list. This
+    /// will be populated with the recommended buffer viewports and resized if
+    /// necessary.
+    pub fn gvr_get_recommended_buffer_viewports(
+        gvr: *const gvr_context,
+        viewport_list: *mut gvr_buffer_viewport_list,
+    );
 }
 extern "C" {
+
     /// Gets the screen (non-distorted) buffer viewport configuration, populating a
-/// previously allocated gvr_buffer_viewport_list object. The updated values
-/// include the per-eye recommended viewport and field of view for the target.
-///
-/// @param gvr Pointer to the gvr instance from which to get the viewports.
-/// @param viewport_list Pointer to a previously allocated viewport list. This
-///     will be populated with the screen buffer viewports and resized if
-///     necessary.
-    pub fn gvr_get_screen_buffer_viewports(gvr: *const gvr_context,
-                                           viewport_list:
-                                               *mut gvr_buffer_viewport_list);
+    /// previously allocated gvr_buffer_viewport_list object. The updated values
+    /// include the per-eye recommended viewport and field of view for the target.
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the viewports.
+    /// @param viewport_list Pointer to a previously allocated viewport list. This
+    /// will be populated with the screen buffer viewports and resized if
+    /// necessary.
+    pub fn gvr_get_screen_buffer_viewports(
+        gvr: *const gvr_context,
+        viewport_list: *mut gvr_buffer_viewport_list,
+    );
 }
 extern "C" {
+
     /// Returns the maximum effective size for the client's render target, given the
-/// parameters of the head mounted device selected. At this resolution, we have
-/// a 1:1 ratio between source pixels and screen pixels in the most magnified
-/// region of the screen. Applications should rarely, if ever, need to render
-/// to a larger target, as it will simply result in sampling artifacts.
-///
-/// Note that this is probably too large for most applications to use as a
-/// render target size. Applications should scale this value to be appropriate
-/// to their graphical load.
-///
-/// @param gvr Pointer to the gvr instance from which to get the size.
-///
-/// @return Maximum effective size for the target render target.
-    pub fn gvr_get_maximum_effective_render_target_size(gvr:
-                                                            *const gvr_context)
-     -> gvr_sizei;
+    /// parameters of the head mounted device selected. At this resolution, we have
+    /// a 1:1 ratio between source pixels and screen pixels in the most magnified
+    /// region of the screen. Applications should rarely, if ever, need to render
+    /// to a larger target, as it will simply result in sampling artifacts.
+    ///
+    /// Note that this is probably too large for most applications to use as a
+    /// render target size. Applications should scale this value to be appropriate
+    /// to their graphical load.
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the size.
+    ///
+    /// @return Maximum effective size for the target render target.
+    pub fn gvr_get_maximum_effective_render_target_size(gvr: *const gvr_context) -> gvr_sizei;
 }
 extern "C" {
+
     /// Returns a non-distorted size for the screen, given the parameters
-/// of the phone and/or the head mounted device selected.
-///
-/// @param gvr Pointer to the gvr instance from which to get the size.
-///
-/// @return Screen (non-distorted) size for the render target.
+    /// of the phone and/or the head mounted device selected.
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the size.
+    ///
+    /// @return Screen (non-distorted) size for the render target.
     pub fn gvr_get_screen_target_size(gvr: *const gvr_context) -> gvr_sizei;
 }
 extern "C" {
-    pub fn gvr_set_surface_size(gvr: *mut gvr_context,
-                                surface_size_pixels: gvr_sizei);
+    pub fn gvr_set_surface_size(gvr: *mut gvr_context, surface_size_pixels: gvr_sizei);
 }
 extern "C" {
+
     /// @deprecated Use the Swap Chain API instead. This function exists only to
-///     support legacy rendering pathways for Cardboard devices. It is
-///     incompatible with the low-latency experiences supported by async
-///     reprojection.
-///
-/// Performs postprocessing, including lens distortion, on the contents of the
-/// passed texture and shows the result on the screen. Lens distortion is
-/// determined by the parameters of the viewer encoded in its QR code. The
-/// passed texture is not modified.
-///
-/// If the application does not call gvr_initialize_gl() before calling this
-/// function, the results are undefined.
-///
-/// @param gvr Pointer to the gvr instance which will do the distortion.
-/// @param texture_id The OpenGL ID of the texture that contains the next frame
-///     to be displayed.
-/// @param viewport_list Rendering parameters.
-/// @param head_space_from_start_space This parameter is ignored.
-/// @param target_presentation_time This parameter is ignored.
-    pub fn gvr_distort_to_screen(gvr: *mut gvr_context, texture_id: i32,
-                                 viewport_list:
-                                     *const gvr_buffer_viewport_list,
-                                 head_space_from_start_space: gvr_mat4f,
-                                 target_presentation_time:
-                                     gvr_clock_time_point);
+    /// support legacy rendering pathways for Cardboard devices. It is
+    /// incompatible with the low-latency experiences supported by async
+    /// reprojection.
+    ///
+    /// Performs postprocessing, including lens distortion, on the contents of the
+    /// passed texture and shows the result on the screen. Lens distortion is
+    /// determined by the parameters of the viewer encoded in its QR code. The
+    /// passed texture is not modified.
+    ///
+    /// If the application does not call gvr_initialize_gl() before calling this
+    /// function, the results are undefined.
+    ///
+    /// @param gvr Pointer to the gvr instance which will do the distortion.
+    /// @param texture_id The OpenGL ID of the texture that contains the next frame
+    /// to be displayed.
+    /// @param viewport_list Rendering parameters.
+    /// @param head_space_from_start_space This parameter is ignored.
+    /// @param target_presentation_time This parameter is ignored.
+    pub fn gvr_distort_to_screen(
+        gvr: *mut gvr_context,
+        texture_id: i32,
+        viewport_list: *const gvr_buffer_viewport_list,
+        head_space_from_start_space: gvr_mat4f,
+        target_presentation_time: gvr_clock_time_point,
+    );
 }
 extern "C" {
+
     /// Queries whether a particular GVR feature is supported by the underlying
-/// platform.  This should be called after gvr_initialize_gl().
-///
-/// @param gvr The context to query against.
-/// @param feature The gvr_feature type being queried.
-/// @return true if feature is supported, false otherwise.
-    pub fn gvr_is_feature_supported(gvr: *const gvr_context, feature: i32)
-     -> bool;
+    /// platform.  This should be called after gvr_initialize_gl().
+    ///
+    /// @param gvr The context to query against.
+    /// @param feature The gvr_feature type being queried.
+    /// @return true if feature is supported, false otherwise.
+    pub fn gvr_is_feature_supported(gvr: *const gvr_context, feature: i32) -> bool;
 }
 extern "C" {
+
     /// Creates a gvr_buffer_viewport instance.
-    pub fn gvr_buffer_viewport_create(gvr: *mut gvr_context)
-     -> *mut gvr_buffer_viewport;
+    pub fn gvr_buffer_viewport_create(gvr: *mut gvr_context) -> *mut gvr_buffer_viewport;
 }
 extern "C" {
+
     /// Frees a gvr_buffer_viewport instance and clears the pointer.
-    pub fn gvr_buffer_viewport_destroy(viewport:
-                                           *mut *mut gvr_buffer_viewport);
+    pub fn gvr_buffer_viewport_destroy(viewport: *mut *mut gvr_buffer_viewport);
 }
 extern "C" {
+
     /// Gets the UV coordinates specifying where the output buffer is sampled.
-///
-/// @param viewport The buffer viewport.
-/// @return UV coordinates as a rectangle.
-    pub fn gvr_buffer_viewport_get_source_uv(viewport:
-                                                 *const gvr_buffer_viewport)
-     -> gvr_rectf;
+    ///
+    /// @param viewport The buffer viewport.
+    /// @return UV coordinates as a rectangle.
+    pub fn gvr_buffer_viewport_get_source_uv(viewport: *const gvr_buffer_viewport) -> gvr_rectf;
 }
 extern "C" {
+
     /// Sets the UV coordinates specifying where the output buffer should be
-/// sampled when compositing the final distorted image.
-///
-/// @param viewport The buffer viewport.
-/// @param uv The new UV coordinates for sampling. The coordinates must be
-///     valid, that is, left <= right and bottom <= top. Otherwise an empty
-///     source region is set, which will result in no output for this viewport.
-    pub fn gvr_buffer_viewport_set_source_uv(viewport:
-                                                 *mut gvr_buffer_viewport,
-                                             uv: gvr_rectf);
+    /// sampled when compositing the final distorted image.
+    ///
+    /// @param viewport The buffer viewport.
+    /// @param uv The new UV coordinates for sampling. The coordinates must be
+    /// valid, that is, left <= right and bottom <= top. Otherwise an empty
+    /// source region is set, which will result in no output for this viewport.
+    pub fn gvr_buffer_viewport_set_source_uv(viewport: *mut gvr_buffer_viewport, uv: gvr_rectf);
 }
 extern "C" {
+
     /// Retrieves the field of view for the referenced buffer region.
-///
-/// This is a helper that converts the stored projection matrix to a field of
-/// view. Note that if the previously set projection matrix cannot be expressed
-/// as a view frustum aligned with the eye's optical axis, the result will be
-/// incorrect.
-///
-/// @param viewport The buffer viewport.
-/// @return The field of view of the rendered image, in degrees.
-    pub fn gvr_buffer_viewport_get_source_fov(viewport:
-                                                  *const gvr_buffer_viewport)
-     -> gvr_rectf;
+    ///
+    /// This is a helper that converts the stored projection matrix to a field of
+    /// view. Note that if the previously set projection matrix cannot be expressed
+    /// as a view frustum aligned with the eye's optical axis, the result will be
+    /// incorrect.
+    ///
+    /// @param viewport The buffer viewport.
+    /// @return The field of view of the rendered image, in degrees.
+    pub fn gvr_buffer_viewport_get_source_fov(viewport: *const gvr_buffer_viewport) -> gvr_rectf;
 }
 extern "C" {
+
     /// Sets the field of view for the viewport contents.
-///
-/// This is a helper that sets the projection matrix in such a way that the
-/// viewport's contents fill the specified FOV around the eye's optical axis.
-///
-/// @param viewport The buffer viewport.
-/// @param fov The field of view to use when compositing the rendered image,
-///     in degrees.
-    pub fn gvr_buffer_viewport_set_source_fov(viewport:
-                                                  *mut gvr_buffer_viewport,
-                                              fov: gvr_rectf);
+    ///
+    /// This is a helper that sets the projection matrix in such a way that the
+    /// viewport's contents fill the specified FOV around the eye's optical axis.
+    ///
+    /// @param viewport The buffer viewport.
+    /// @param fov The field of view to use when compositing the rendered image,
+    /// in degrees.
+    pub fn gvr_buffer_viewport_set_source_fov(viewport: *mut gvr_buffer_viewport, fov: gvr_rectf);
 }
 extern "C" {
+
     /// Gets the matrix that positions the viewport in eye space.
-///
-/// @param viewport The buffer viewport.
-/// @return Matrix that transforms a quad with vertices (-1, -1, 0), (1, -1, 0),
-///     (-1, 1, 0), (1, 1, 0) representing the viewport contents to its desired
-///     eye space position for the target eye.
-    pub fn gvr_buffer_viewport_get_transform(viewport:
-                                                 *const gvr_buffer_viewport)
-     -> gvr_mat4f;
+    ///
+    /// @param viewport The buffer viewport.
+    /// @return Matrix that transforms a quad with vertices (-1, -1, 0), (1, -1, 0),
+    /// (-1, 1, 0), (1, 1, 0) representing the viewport contents to its desired
+    /// eye space position for the target eye.
+    pub fn gvr_buffer_viewport_get_transform(viewport: *const gvr_buffer_viewport) -> gvr_mat4f;
 }
 extern "C" {
+
     /// Sets the matrix that positions the viewport in eye space.
-///
-/// @param viewport The buffer viewport.
-/// @param transform Matrix that transforms a quad with vertices (-1, -1, 0),
-///     (1, -1, 0), (-1, 1, 0), (1, 1, 0) representing the viewport contents to
-///     its desired eye space position for the target eye.
-    pub fn gvr_buffer_viewport_set_transform(viewport:
-                                                 *mut gvr_buffer_viewport,
-                                             transform: gvr_mat4f);
+    ///
+    /// @param viewport The buffer viewport.
+    /// @param transform Matrix that transforms a quad with vertices (-1, -1, 0),
+    /// (1, -1, 0), (-1, 1, 0), (1, 1, 0) representing the viewport contents to
+    /// its desired eye space position for the target eye.
+    pub fn gvr_buffer_viewport_set_transform(
+        viewport: *mut gvr_buffer_viewport,
+        transform: gvr_mat4f,
+    );
 }
 extern "C" {
+
     /// Gets the target logical eye for the specified viewport.
-///
-/// @param viewport The buffer viewport.
-/// @return Index of the target logical eye for this viewport.
-    pub fn gvr_buffer_viewport_get_target_eye(viewport:
-                                                  *const gvr_buffer_viewport)
-     -> i32;
+    ///
+    /// @param viewport The buffer viewport.
+    /// @return Index of the target logical eye for this viewport.
+    pub fn gvr_buffer_viewport_get_target_eye(viewport: *const gvr_buffer_viewport) -> i32;
 }
 extern "C" {
+
     /// Sets the target logical eye for the specified viewport.
-///
-/// @param viewport The buffer viewport.
-/// @param index Index of the target logical eye.
-    pub fn gvr_buffer_viewport_set_target_eye(viewport:
-                                                  *mut gvr_buffer_viewport,
-                                              index: i32);
+    ///
+    /// @param viewport The buffer viewport.
+    /// @param index Index of the target logical eye.
+    pub fn gvr_buffer_viewport_set_target_eye(viewport: *mut gvr_buffer_viewport, index: i32);
 }
 extern "C" {
+
     /// Gets the index of the source buffer from which the viewport reads its
-/// undistorted pixels.
-///
-/// @param viewport The buffer viewport.
-/// @return Index of the source buffer. This corresponds to the index in the
-///     list of buffer specs that was passed to gvr_swap_chain_create().
-    pub fn gvr_buffer_viewport_get_source_buffer_index(viewport:
-                                                           *const gvr_buffer_viewport)
-     -> i32;
+    /// undistorted pixels.
+    ///
+    /// @param viewport The buffer viewport.
+    /// @return Index of the source buffer. This corresponds to the index in the
+    /// list of buffer specs that was passed to gvr_swap_chain_create().
+    pub fn gvr_buffer_viewport_get_source_buffer_index(viewport: *const gvr_buffer_viewport)
+        -> i32;
 }
 extern "C" {
+
     /// Sets the buffer from which the viewport reads its undistorted pixels.
-///
-/// To use the contents of the external surface as buffer contents, associate an
-/// external surface with the viewport by calling
-/// gvr_buffer_viewport_set_external_surface_id(), then call this function and
-/// pass GVR_BUFFER_INDEX_EXTERNAL_SURFACE.
-///
-/// @param viewport The buffer viewport.
-/// @param buffer_index The index of the source buffer. This is either an index
-///     in the list of buffer specs that was passed to
-///     gvr_swap_chain_create(), or GVR_BUFFER_INDEX_EXTERNAL_SURFACE.
-    pub fn gvr_buffer_viewport_set_source_buffer_index(viewport:
-                                                           *mut gvr_buffer_viewport,
-                                                       buffer_index: i32);
+    ///
+    /// To use the contents of the external surface as buffer contents, associate an
+    /// external surface with the viewport by calling
+    /// gvr_buffer_viewport_set_external_surface_id(), then call this function and
+    /// pass GVR_BUFFER_INDEX_EXTERNAL_SURFACE.
+    ///
+    /// @param viewport The buffer viewport.
+    /// @param buffer_index The index of the source buffer. This is either an index
+    /// in the list of buffer specs that was passed to
+    /// gvr_swap_chain_create(), or GVR_BUFFER_INDEX_EXTERNAL_SURFACE.
+    pub fn gvr_buffer_viewport_set_source_buffer_index(
+        viewport: *mut gvr_buffer_viewport,
+        buffer_index: i32,
+    );
 }
 extern "C" {
+
     /// Gets the ID of the externally-managed Surface texture from which this
-/// viewport reads undistored pixels.
-///
-/// @param viewport The buffer viewport.
-/// @return ID of the externally-managed Surface of undistorted pixels.
-    pub fn gvr_buffer_viewport_get_external_surface_id(viewport:
-                                                           *const gvr_buffer_viewport)
-     -> i32;
+    /// viewport reads undistored pixels.
+    ///
+    /// @param viewport The buffer viewport.
+    /// @return ID of the externally-managed Surface of undistorted pixels.
+    pub fn gvr_buffer_viewport_get_external_surface_id(viewport: *const gvr_buffer_viewport)
+        -> i32;
 }
 extern "C" {
+
     /// Sets the ID of the externally-managed Surface texture from which this
-/// viewport reads. The ID is issued by GvrLayout.
-///
-/// @param viewport The buffer viewport.
-/// @param external_surface_id The ID of the surface to read from.
-    pub fn gvr_buffer_viewport_set_external_surface_id(viewport:
-                                                           *mut gvr_buffer_viewport,
-                                                       external_surface_id:
-                                                           i32);
+    /// viewport reads. The ID is issued by GvrLayout. If this viewport does not
+    /// read from an external surface, this should be set to
+    /// GVR_EXTERNAL_SURFACE_ID_NONE, which is also the default value. If it does
+    /// read from an external surface, set this to the ID obtained from GvrLayout
+    /// and set the source buffer index to the special value
+    /// GVR_BUFFER_INDEX_EXTERNAL_SURFACE.
+    ///
+    /// @param viewport The buffer viewport.
+    /// @param external_surface_id The ID of the surface to read from.
+    pub fn gvr_buffer_viewport_set_external_surface_id(
+        viewport: *mut gvr_buffer_viewport,
+        external_surface_id: i32,
+    );
 }
 extern "C" {
+
     /// Gets the type of reprojection to perform on the specified viewport.
-///
-/// @param viewport The buffer viewport.
-/// @return Type of reprojection that is applied to the viewport.
-    pub fn gvr_buffer_viewport_get_reprojection(viewport:
-                                                    *const gvr_buffer_viewport)
-     -> i32;
+    ///
+    /// @param viewport The buffer viewport.
+    /// @return Type of reprojection that is applied to the viewport.
+    pub fn gvr_buffer_viewport_get_reprojection(viewport: *const gvr_buffer_viewport) -> i32;
 }
 extern "C" {
+
     /// Sets the type of reprojection to perform on the specified viewport.
-/// Viewports that display world content should use full reprojection.
-/// Viewports that display head-locked UI should disable reprojection to avoid
-/// excessive judder. The default is to perform full reprojection.
-///
-/// @param viewport The buffer viewport.
-/// @param reprojection Type of reprojection that will be applied to the passed
-///     viewport.
-    pub fn gvr_buffer_viewport_set_reprojection(viewport:
-                                                    *mut gvr_buffer_viewport,
-                                                reprojection: i32);
+    /// Viewports that display world content should use full reprojection.
+    /// Viewports that display head-locked UI should disable reprojection to avoid
+    /// excessive judder. The default is to perform full reprojection.
+    ///
+    /// @param viewport The buffer viewport.
+    /// @param reprojection Type of reprojection that will be applied to the passed
+    /// viewport.
+    pub fn gvr_buffer_viewport_set_reprojection(
+        viewport: *mut gvr_buffer_viewport,
+        reprojection: i32,
+    );
 }
 extern "C" {
+
     /// Sets the layer in a multiview buffer from which the viewport should sample.
-///
-/// @param layer_index The layer in the array texture that distortion samples
-///     from.  Must be non-negative.  Defaults to 0.
-    pub fn gvr_buffer_viewport_set_source_layer(viewport:
-                                                    *mut gvr_buffer_viewport,
-                                                layer_index: i32);
+    ///
+    /// @param layer_index The layer in the array texture that distortion samples
+    /// from.  Must be non-negative.  Defaults to 0.
+    pub fn gvr_buffer_viewport_set_source_layer(
+        viewport: *mut gvr_buffer_viewport,
+        layer_index: i32,
+    );
 }
 extern "C" {
+
     /// Gets the opacity to perform on the specified viewport.
-///
-/// @param viewport The buffer viewport.
-/// @return opacity that is applied to the viewport, default to be 1.
-    pub fn gvr_buffer_viewport_get_opacity(viewport:
-                                               *const gvr_buffer_viewport)
-     -> f32;
+    ///
+    /// @param viewport The buffer viewport.
+    /// @return opacity that is applied to the viewport, default to be 1.
+    pub fn gvr_buffer_viewport_get_opacity(viewport: *const gvr_buffer_viewport) -> f32;
 }
 extern "C" {
+
     /// Sets the opacity to perform on the specified viewport.
-///
-/// @param viewport The buffer viewport.
-/// @param opacity Opacity that will be applied per viewport.
-///     It should be within [0,1], default to be 1.
-    pub fn gvr_buffer_viewport_set_opacity(viewport: *mut gvr_buffer_viewport,
-                                           opacity: f32);
+    ///
+    /// @param viewport The buffer viewport.
+    /// @param opacity Opacity that will be applied per viewport.
+    /// It should be within [0,1], default to be 1.
+    pub fn gvr_buffer_viewport_set_opacity(viewport: *mut gvr_buffer_viewport, opacity: f32);
 }
 extern "C" {
+
     /// Compares two gvr_buffer_viewport instances and returns true if they specify
-/// the same view mapping.
-///
-/// @param a Instance of a buffer viewport.
-/// @param b Another instance of a buffer viewport.
-/// @return True if the passed viewports are the same.
-    pub fn gvr_buffer_viewport_equal(a: *const gvr_buffer_viewport,
-                                     b: *const gvr_buffer_viewport) -> bool;
+    /// the same view mapping.
+    ///
+    /// @param a Instance of a buffer viewport.
+    /// @param b Another instance of a buffer viewport.
+    /// @return True if the passed viewports are the same.
+    pub fn gvr_buffer_viewport_equal(
+        a: *const gvr_buffer_viewport,
+        b: *const gvr_buffer_viewport,
+    ) -> bool;
 }
 extern "C" {
-    ///     returned object when it is no longer needed.
-    pub fn gvr_buffer_viewport_list_create(gvr: *const gvr_context)
-     -> *mut gvr_buffer_viewport_list;
+
+    /// returned object when it is no longer needed.
+    pub fn gvr_buffer_viewport_list_create(
+        gvr: *const gvr_context,
+    ) -> *mut gvr_buffer_viewport_list;
 }
 extern "C" {
+
     /// Destroys a gvr_buffer_viewport_list instance. The parameter will be nulled
-/// by this operation.
-///
-/// @param viewport_list Pointer to a pointer to the viewport list instance to
-///     be destroyed and nulled.
-    pub fn gvr_buffer_viewport_list_destroy(viewport_list:
-                                                *mut *mut gvr_buffer_viewport_list);
+    /// by this operation.
+    ///
+    /// @param viewport_list Pointer to a pointer to the viewport list instance to
+    /// be destroyed and nulled.
+    pub fn gvr_buffer_viewport_list_destroy(viewport_list: *mut *mut gvr_buffer_viewport_list);
 }
 extern "C" {
+
     /// Returns the size of the given viewport list.
-///
-/// @param viewport_list Pointer to a viewport list.
-/// @return The number of entries in the viewport list.
-    pub fn gvr_buffer_viewport_list_get_size(viewport_list:
-                                                 *const gvr_buffer_viewport_list)
-     -> usize;
+    ///
+    /// @param viewport_list Pointer to a viewport list.
+    /// @return The number of entries in the viewport list.
+    pub fn gvr_buffer_viewport_list_get_size(
+        viewport_list: *const gvr_buffer_viewport_list,
+    ) -> usize;
 }
 extern "C" {
+
     /// Retrieve a buffer viewport entry from a list.
-///
-/// @param viewport_list Pointer to the previously allocated viewport list.
-/// @param index Zero-based index of the viewport entry to query. Must be
-///    smaller than the list size.
-/// @param viewport The buffer viewport structure that will be populated with
-///    retrieved data.
-    pub fn gvr_buffer_viewport_list_get_item(viewport_list:
-                                                 *const gvr_buffer_viewport_list,
-                                             index: usize,
-                                             viewport:
-                                                 *mut gvr_buffer_viewport);
+    ///
+    /// @param viewport_list Pointer to the previously allocated viewport list.
+    /// @param index Zero-based index of the viewport entry to query. Must be
+    /// smaller than the list size.
+    /// @param viewport The buffer viewport structure that will be populated with
+    /// retrieved data.
+    pub fn gvr_buffer_viewport_list_get_item(
+        viewport_list: *const gvr_buffer_viewport_list,
+        index: usize,
+        viewport: *mut gvr_buffer_viewport,
+    );
 }
 extern "C" {
+
     /// Update an element of the viewport list or append a new one at the end.
-///
-/// @param viewport_list Pointer to a previously allocated viewport list.
-/// @param index Index of the buffer viewport entry to update. If the
-///     `viewport_list` size is equal to the index, a new viewport entry will be
-///     added. The `viewport_list` size must *not* be less than the index value.
-/// @param viewport A pointer to the buffer viewport object.
-    pub fn gvr_buffer_viewport_list_set_item(viewport_list:
-                                                 *mut gvr_buffer_viewport_list,
-                                             index: usize,
-                                             viewport:
-                                                 *const gvr_buffer_viewport);
+    ///
+    /// @param viewport_list Pointer to a previously allocated viewport list.
+    /// @param index Index of the buffer viewport entry to update. If the
+    /// `viewport_list` size is equal to the index, a new viewport entry will be
+    /// added. The `viewport_list` size must *not* be less than the index value.
+    /// @param viewport A pointer to the buffer viewport object.
+    pub fn gvr_buffer_viewport_list_set_item(
+        viewport_list: *mut gvr_buffer_viewport_list,
+        index: usize,
+        viewport: *const gvr_buffer_viewport,
+    );
 }
 extern "C" {
+
     /// Creates a default buffer specification.
-    pub fn gvr_buffer_spec_create(gvr: *mut gvr_context)
-     -> *mut gvr_buffer_spec;
+    pub fn gvr_buffer_spec_create(gvr: *mut gvr_context) -> *mut gvr_buffer_spec;
 }
 extern "C" {
+
     /// Destroy the buffer specification and null the pointer.
     pub fn gvr_buffer_spec_destroy(spec: *mut *mut gvr_buffer_spec);
 }
 extern "C" {
+
     /// Gets the size of the buffer to be created.
-///
-/// @param spec Buffer specification.
-/// @return Size of the pixel buffer. The default is equal to the recommended
-///     render target size at the time when the specification was created.
-    pub fn gvr_buffer_spec_get_size(spec: *const gvr_buffer_spec)
-     -> gvr_sizei;
+    ///
+    /// @param spec Buffer specification.
+    /// @return Size of the pixel buffer. The default is equal to the recommended
+    /// render target size at the time when the specification was created.
+    pub fn gvr_buffer_spec_get_size(spec: *const gvr_buffer_spec) -> gvr_sizei;
 }
 extern "C" {
+
     /// Sets the size of the buffer to be created.
-///
-/// @param spec Buffer specification.
-/// @param size The size. Width and height must both be greater than zero.
-///     Otherwise, the application is aborted.
-    pub fn gvr_buffer_spec_set_size(spec: *mut gvr_buffer_spec,
-                                    size: gvr_sizei);
+    ///
+    /// @param spec Buffer specification.
+    /// @param size The size. Width and height must both be greater than zero.
+    /// Otherwise, the application is aborted.
+    pub fn gvr_buffer_spec_set_size(spec: *mut gvr_buffer_spec, size: gvr_sizei);
 }
 extern "C" {
+
     /// Gets the number of samples per pixel in the buffer to be created.
-///
-/// @param spec Buffer specification.
-/// @return Value >= 1 giving the number of samples. 1 means multisampling is
-///     disabled. Negative values and 0 are never returned.
+    ///
+    /// @param spec Buffer specification.
+    /// @return Value >= 1 giving the number of samples. 1 means multisampling is
+    /// disabled. Negative values and 0 are never returned.
     pub fn gvr_buffer_spec_get_samples(spec: *const gvr_buffer_spec) -> i32;
 }
 extern "C" {
+
     /// Sets the number of samples per pixel in the buffer to be created.
-///
-/// @param spec Buffer specification.
-/// @param num_samples The number of samples. Negative values are an error.
-///     The values 0 and 1 are treated identically and indicate that
-    pub fn gvr_buffer_spec_set_samples(spec: *mut gvr_buffer_spec,
-                                       num_samples: i32);
+    ///
+    /// @param spec Buffer specification.
+    /// @param num_samples The number of samples. Negative values are an error.
+    /// The values 0 and 1 are treated identically and indicate that
+    pub fn gvr_buffer_spec_set_samples(spec: *mut gvr_buffer_spec, num_samples: i32);
 }
 extern "C" {
+
     /// Sets the color format for the buffer to be created. Default format is
-/// GVR_COLOR_FORMAT_RGBA_8888. For all alpha-containing formats, the pixels
-/// are expected to be premultiplied with alpha. In other words, the 60% opaque
-/// primary green color is (0.0, 0.6, 0.0, 0.6).
-///
-/// @param spec Buffer specification.
-/// @param color_format The color format for the buffer. Valid formats are in
-///     the gvr_color_format_type enum.
-    pub fn gvr_buffer_spec_set_color_format(spec: *mut gvr_buffer_spec,
-                                            color_format: i32);
+    /// GVR_COLOR_FORMAT_RGBA_8888. For all alpha-containing formats, the pixels
+    /// are expected to be premultiplied with alpha. In other words, the 60% opaque
+    /// primary green color is (0.0, 0.6, 0.0, 0.6).
+    ///
+    /// @param spec Buffer specification.
+    /// @param color_format The color format for the buffer. Valid formats are in
+    /// the gvr_color_format_type enum.
+    pub fn gvr_buffer_spec_set_color_format(spec: *mut gvr_buffer_spec, color_format: i32);
 }
 extern "C" {
+
     /// Sets the depth and stencil format for the buffer to be created. Currently,
-/// only packed stencil formats are supported. Default format is
-/// GVR_DEPTH_STENCIL_FORMAT_DEPTH_16.
-///
-/// @param spec Buffer specification.
-/// @param depth_stencil_format The depth and stencil format for the buffer.
-///     Valid formats are in the gvr_depth_stencil_format_type enum.
-    pub fn gvr_buffer_spec_set_depth_stencil_format(spec:
-                                                        *mut gvr_buffer_spec,
-                                                    depth_stencil_format:
-                                                        i32);
+    /// only packed stencil formats are supported. Default format is
+    /// GVR_DEPTH_STENCIL_FORMAT_DEPTH_16.
+    ///
+    /// @param spec Buffer specification.
+    /// @param depth_stencil_format The depth and stencil format for the buffer.
+    /// Valid formats are in the gvr_depth_stencil_format_type enum.
+    pub fn gvr_buffer_spec_set_depth_stencil_format(
+        spec: *mut gvr_buffer_spec,
+        depth_stencil_format: i32,
+    );
 }
 extern "C" {
+
     /// Sets the number of layers in a framebuffer backed by an array texture.
-///
-/// Default is 1, which means a non-layered texture will be created.
-/// Not all platforms support multiple layers, so clients can call
-/// gvr_is_feature_supported(GVR_FEATURE_MULTIVIEW) to check.
-///
-/// @param spec Buffer specification.
-/// @param num_layers The number of layers in the array texture.
-    pub fn gvr_buffer_spec_set_multiview_layers(spec: *mut gvr_buffer_spec,
-                                                num_layers: i32);
+    ///
+    /// Default is 1, which means a non-layered texture will be created.
+    /// Not all platforms support multiple layers, so clients can call
+    /// gvr_is_feature_supported(GVR_FEATURE_MULTIVIEW) to check.
+    ///
+    /// @param spec Buffer specification.
+    /// @param num_layers The number of layers in the array texture.
+    pub fn gvr_buffer_spec_set_multiview_layers(spec: *mut gvr_buffer_spec, num_layers: i32);
 }
 extern "C" {
+
     /// Creates a swap chain from the given buffer specifications.
-/// This is a potentially time-consuming operation. All frames within the
-/// swapchain will be allocated. Once rendering is stopped, call
-/// gvr_swap_chain_destroy() to free GPU resources. The passed gvr_context must
-/// not be destroyed until then.
-///
-/// Swap chains can have no buffers. This is useful when only displaying
-/// external surfaces. When `count` is zero, `buffers` must be null.
-///
-/// @param gvr GVR instance for which a swap chain will be created.
-/// @param buffers Array of pixel buffer specifications. Each frame in the
-///     swap chain will be composed of these buffers.
-/// @param count Number of buffer specifications in the array.
-/// @return Opaque handle to the newly created swap chain.
-    pub fn gvr_swap_chain_create(gvr: *mut gvr_context,
-                                 buffers: *mut *const gvr_buffer_spec,
-                                 count: i32) -> *mut gvr_swap_chain;
+    /// This is a potentially time-consuming operation. All frames within the
+    /// swapchain will be allocated. Once rendering is stopped, call
+    /// gvr_swap_chain_destroy() to free GPU resources. The passed gvr_context must
+    /// not be destroyed until then.
+    ///
+    /// Swap chains can have no buffers. This is useful when only displaying
+    /// external surfaces. When `count` is zero, `buffers` must be null.
+    ///
+    /// @param gvr GVR instance for which a swap chain will be created.
+    /// @param buffers Array of pixel buffer specifications. Each frame in the
+    /// swap chain will be composed of these buffers.
+    /// @param count Number of buffer specifications in the array.
+    /// @return Opaque handle to the newly created swap chain.
+    pub fn gvr_swap_chain_create(
+        gvr: *mut gvr_context,
+        buffers: *mut *const gvr_buffer_spec,
+        count: i32,
+    ) -> *mut gvr_swap_chain;
 }
 extern "C" {
+
     /// Destroys the swap chain and nulls the pointer.
     pub fn gvr_swap_chain_destroy(swap_chain: *mut *mut gvr_swap_chain);
 }
 extern "C" {
+
     /// Gets the number of buffers in each frame of the swap chain.
-    pub fn gvr_swap_chain_get_buffer_count(swap_chain: *const gvr_swap_chain)
-     -> i32;
+    pub fn gvr_swap_chain_get_buffer_count(swap_chain: *const gvr_swap_chain) -> i32;
 }
 extern "C" {
+
     /// Retrieves the size of the specified pixel buffer. Note that if the buffer
-/// was resized while the current frame was acquired, the return value will be
-/// different than the value obtained from the equivalent function for the
-/// current frame.
-///
-/// @param swap_chain The swap chain.
-/// @param index Index of the pixel buffer.
-/// @return Size of the specified pixel buffer in frames that will be returned
-///     from gvr_swap_chain_acquire_frame().
-    pub fn gvr_swap_chain_get_buffer_size(swap_chain: *const gvr_swap_chain,
-                                          index: i32) -> gvr_sizei;
+    /// was resized while the current frame was acquired, the return value will be
+    /// different than the value obtained from the equivalent function for the
+    /// current frame.
+    ///
+    /// @param swap_chain The swap chain.
+    /// @param index Index of the pixel buffer.
+    /// @return Size of the specified pixel buffer in frames that will be returned
+    /// from gvr_swap_chain_acquire_frame().
+    pub fn gvr_swap_chain_get_buffer_size(
+        swap_chain: *const gvr_swap_chain,
+        index: i32,
+    ) -> gvr_sizei;
 }
 extern "C" {
+
     /// Resizes the specified pixel buffer to the given size. The frames are resized
-/// when they are unused, so the currently acquired frame will not be resized
-/// immediately.
-///
-/// @param swap_chain The swap chain.
-/// @param index Index of the pixel buffer to resize.
-/// @param size New size for the specified pixel buffer.
-    pub fn gvr_swap_chain_resize_buffer(swap_chain: *mut gvr_swap_chain,
-                                        index: i32, size: gvr_sizei);
+    /// when they are unused, so the currently acquired frame will not be resized
+    /// immediately.
+    ///
+    /// @param swap_chain The swap chain.
+    /// @param index Index of the pixel buffer to resize.
+    /// @param size New size for the specified pixel buffer.
+    pub fn gvr_swap_chain_resize_buffer(
+        swap_chain: *mut gvr_swap_chain,
+        index: i32,
+        size: gvr_sizei,
+    );
 }
 extern "C" {
+
     /// Acquires a frame from the swap chain for rendering. Buffers that are part of
-/// the frame can then be bound with gvr_frame_bind_buffer(). Once the frame
-/// is finished and all its constituent buffers are ready, call
-/// gvr_frame_submit() to display it while applying lens distortion.
-///
-/// When this is called, the current thread's GL context must be the same
-/// context that was current when gvr_initialize_gl() was called, or at least be
-/// in a share group with the initialization context.
-///
-/// @param swap_chain The swap chain.
-/// @return Handle to the acquired frame. NULL if the swap chain is invalid,
-///     or if acquire has already been called on this swap chain.
-    pub fn gvr_swap_chain_acquire_frame(swap_chain: *mut gvr_swap_chain)
-     -> *mut gvr_frame;
+    /// the frame can then be bound with gvr_frame_bind_buffer(). Once the frame
+    /// is finished and all its constituent buffers are ready, call
+    /// gvr_frame_submit() to display it while applying lens distortion.
+    ///
+    /// When this is called, the current thread's GL context must be the same
+    /// context that was current when gvr_initialize_gl() was called, or at least be
+    /// in a share group with the initialization context.
+    ///
+    /// @param swap_chain The swap chain.
+    /// @return Handle to the acquired frame. NULL if the swap chain is invalid,
+    /// or if acquire has already been called on this swap chain.
+    pub fn gvr_swap_chain_acquire_frame(swap_chain: *mut gvr_swap_chain) -> *mut gvr_frame;
 }
 extern "C" {
+
     /// Binds a pixel buffer that is part of the frame to the OpenGL framebuffer.
-///
-/// @param frame Frame handle acquired from the swap chain.
-/// @param index Index of the pixel buffer to bind. This corresponds to the
-///     index in the buffer spec list that was passed to
-///     gvr_swap_chain_create().
+    ///
+    /// @param frame Frame handle acquired from the swap chain.
+    /// @param index Index of the pixel buffer to bind. This corresponds to the
+    /// index in the buffer spec list that was passed to
+    /// gvr_swap_chain_create().
     pub fn gvr_frame_bind_buffer(frame: *mut gvr_frame, index: i32);
 }
 extern "C" {
+
     /// Unbinds any buffers bound from this frame and binds the default OpenGL
-/// framebuffer.
+    /// framebuffer.
     pub fn gvr_frame_unbind(frame: *mut gvr_frame);
 }
 extern "C" {
+
     /// Returns the dimensions of the pixel buffer with the specified index. Note
-/// that a frame that was acquired before resizing a swap chain buffer will not
-/// be resized until it is submitted to the swap chain.
-///
-/// @param frame Frame handle.
-/// @param index Index of the pixel buffer to inspect.
-/// @return Dimensions of the specified pixel buffer.
-    pub fn gvr_frame_get_buffer_size(frame: *const gvr_frame, index: i32)
-     -> gvr_sizei;
+    /// that a frame that was acquired before resizing a swap chain buffer will not
+    /// be resized until it is submitted to the swap chain.
+    ///
+    /// @param frame Frame handle.
+    /// @param index Index of the pixel buffer to inspect.
+    /// @return Dimensions of the specified pixel buffer.
+    pub fn gvr_frame_get_buffer_size(frame: *const gvr_frame, index: i32) -> gvr_sizei;
 }
 extern "C" {
+
     /// Gets the name (ID) of the framebuffer object associated with the specified
-/// buffer. The OpenGL state is not modified.
-///
-/// @param frame Frame handle.
-/// @param index Index of a pixel buffer.
-/// @return OpenGL object name (ID) of a framebuffer object which can be used
-///     to render into the buffer. The ID is valid only until the frame is
-///     submitted.
-    pub fn gvr_frame_get_framebuffer_object(frame: *const gvr_frame,
-                                            index: i32) -> i32;
+    /// buffer. The OpenGL state is not modified.
+    ///
+    /// @param frame Frame handle.
+    /// @param index Index of a pixel buffer.
+    /// @return OpenGL object name (ID) of a framebuffer object which can be used
+    /// to render into the buffer. The ID is valid only until the frame is
+    /// submitted.
+    pub fn gvr_frame_get_framebuffer_object(frame: *const gvr_frame, index: i32) -> i32;
 }
 extern "C" {
+
+    /// Gets the hardware buffer backing the specified frame buffer.
+    ///
+    /// Hardware buffers (Android NDK type AHardwareBuffer) are used to back frames
+    /// if asynchronous reprojection is enabled and GVR_FEATURE_HARDWARE_BUFFERS is
+    /// supported (currently on Android O and later Android versions). See the
+    /// documentation for the feature enum value for further information.
+    ///
+    /// There is no need to acquire or release the AHardwareBuffer. The swap chain
+    /// maintains a reference to it while the frame is acquired.
+    ///
+    /// @param frame The gvr_frame from which to obtain the buffer.
+    /// @param index Index of the pixel buffer.
+    /// @return Pointer to AHardwareBuffer backing the frame's pixel buffer where
+    /// available, or NULL otherwise.
+    pub fn gvr_frame_get_hardware_buffer(
+        frame: *const gvr_frame,
+        index: i32,
+    ) -> *mut AHardwareBuffer;
+}
+extern "C" {
+
     /// Submits the frame for distortion and display on the screen. The passed
-/// pointer is nulled to prevent reuse.
-///
-/// @param frame The frame to submit.
-/// @param list Buffer view configuration to be used for this frame.
-/// @param head_space_from_start_space Transform from start space (space with
-///     head at the origin at last tracking reset) to head space (space with
-///     head at the origin and axes aligned to the view vector).
-    pub fn gvr_frame_submit(frame: *mut *mut gvr_frame,
-                            list: *const gvr_buffer_viewport_list,
-                            head_space_from_start_space: gvr_mat4f);
+    /// pointer is nulled to prevent reuse.
+    ///
+    /// @param frame The frame to submit.
+    /// @param list Buffer view configuration to be used for this frame.
+    /// @param head_space_from_start_space Transform from start space (space with
+    /// head at the origin at last tracking reset) to head space (space with
+    /// head at the origin and axes aligned to the view vector).
+    pub fn gvr_frame_submit(
+        frame: *mut *mut gvr_frame,
+        list: *const gvr_buffer_viewport_list,
+        head_space_from_start_space: gvr_mat4f,
+    );
 }
 extern "C" {
+
     /// Resets the OpenGL framebuffer binding to what it was at the time the
-/// passed gvr_context was created.
+    /// passed gvr_context was created.
     pub fn gvr_bind_default_framebuffer(gvr: *mut gvr_context);
 }
 extern "C" {
+
     /// Gets the current monotonic system time.
-///
-/// @return The current monotonic system time.
+    ///
+    /// @return The current monotonic system time.
     pub fn gvr_get_time_point_now() -> gvr_clock_time_point;
 }
 extern "C" {
+
+    /// @deprecated Calls to this method can be safely replaced by calls to
+    /// gvr_get_head_space_from_start_space_transform. The new API reflects that
+    /// the call *can* return a full 6DoF transform when supported by both the
+    /// host platform and the client application.
+    ///
     /// Gets the rotation from start space to head space.  The head space is a
-/// space where the head is at the origin and faces the -Z direction.
-///
-/// @param gvr Pointer to the gvr instance from which to get the pose.
-/// @param time The time at which to get the head pose. The time should be in
-///     the future. If the time is not in the future, it will be clamped to now.
-/// @return A matrix representation of the rotation from start space (the space
-///     where the head was last reset) to head space (the space with the head
-///     at the origin, and the axes aligned to the view vector).
-    pub fn gvr_get_head_space_from_start_space_rotation(gvr:
-                                                            *const gvr_context,
-                                                        time:
-                                                            gvr_clock_time_point)
-     -> gvr_mat4f;
+    /// space where the head is at the origin and faces the -Z direction.
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the pose.
+    /// @param time The time at which to get the head pose. The time should be in
+    /// the future. If the time is not in the future, it will be clamped to now.
+    /// @return A matrix representation of the rotation from start space (the space
+    /// where the head was last reset) to head space (the space with the head
+    /// at the origin, and the axes aligned to the view vector).
+    pub fn gvr_get_head_space_from_start_space_rotation(
+        gvr: *const gvr_context,
+        time: gvr_clock_time_point,
+    ) -> gvr_mat4f;
 }
 extern "C" {
+
     /// Gets the position and rotation from start space to head space.  The head
-/// space is a space where the head is at the origin and faces the -Z direction.
-///
-/// @param gvr Pointer to the gvr instance from which to get the pose.
-/// @param time The time at which to get the head pose. The time should be in
-///     the future. If the time is not in the future, it will be clamped to now.
-/// @return A matrix representation of the position and rotation from start
-///      space (the space where the head was last reset) to head space (the
-///      space with the head at the origin, and the axes aligned to the view
-///      vector).
-    pub fn gvr_get_head_space_from_start_space_transform(gvr:
-                                                             *const gvr_context,
-                                                         time:
-                                                             gvr_clock_time_point)
-     -> gvr_mat4f;
+    /// space is a space where the head is at the origin and faces the -Z direction.
+    ///
+    /// For platforms that support 6DoF head tracking, the app may also be required
+    /// to declare support for 6DoF in order to receive a fully formed 6DoF pose,
+    /// e.g., on Android, this requires declaration of support for at least version
+    /// 1 of the "android.hardware.vr.headtracking" feature in the manifest.
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the pose.
+    /// @param time The time at which to get the head pose. The time should be in
+    /// the future. If the time is not in the future, it will be clamped to now.
+    /// @return A matrix representation of the position and rotation from start
+    /// space (the space where the head was last reset) to head space (the
+    /// space with the head at the origin, and the axes aligned to the view
+    /// vector).
+    pub fn gvr_get_head_space_from_start_space_transform(
+        gvr: *const gvr_context,
+        time: gvr_clock_time_point,
+    ) -> gvr_mat4f;
 }
 extern "C" {
+
     /// Applies a simple neck model translation based on the rotation of the
-/// provided head pose.
-///
-/// Note: Neck model application may not be appropriate for all tracking
-/// scenarios, e.g., when tracking is non-biological.
-///
-/// @param gvr Pointer to the context instance from which the pose was obtained.
-/// @param head_space_from_start_space_rotation The head rotation as returned by
-///     gvr_get_head_space_from_start_space_rotation().
-/// @param factor A scaling factor for the neck model offset, clamped from 0 to
-///     1. This should be 1 for most scenarios, while 0 will effectively disable
-///     neck model application. This value can be animated to smoothly
-///     interpolate between alternative (client-defined) neck models.
-/// @return The new head pose with the neck model applied.
-    pub fn gvr_apply_neck_model(gvr: *const gvr_context,
-                                head_space_from_start_space_rotation:
-                                    gvr_mat4f, factor: f32) -> gvr_mat4f;
+    /// provided head pose.
+    ///
+    /// Note: Neck model application may not be appropriate for all tracking
+    /// scenarios, e.g., when tracking is non-biological.
+    ///
+    /// @param gvr Pointer to the context instance from which the pose was obtained.
+    /// @param head_space_from_start_space_rotation The head rotation as returned by
+    /// gvr_get_head_space_from_start_space_rotation().
+    /// @param factor A scaling factor for the neck model offset, clamped from 0 to
+    /// 1. This should be 1 for most scenarios, while 0 will effectively disable
+    /// neck model application. This value can be animated to smoothly
+    /// interpolate between alternative (client-defined) neck models.
+    /// @return The new head pose with the neck model applied.
+    pub fn gvr_apply_neck_model(
+        gvr: *const gvr_context,
+        head_space_from_start_space_rotation: gvr_mat4f,
+        factor: f32,
+    ) -> gvr_mat4f;
 }
 extern "C" {
+
     /// Pauses head tracking, disables all sensors (to save power).
-///
-/// @param gvr Pointer to the gvr instance for which tracking will be paused and
-///     sensors disabled.
+    ///
+    /// @param gvr Pointer to the gvr instance for which tracking will be paused and
+    /// sensors disabled.
     pub fn gvr_pause_tracking(gvr: *mut gvr_context);
 }
 extern "C" {
+
     /// Resumes head tracking, re-enables all sensors.
-///
-/// @param gvr Pointer to the gvr instance for which tracking will be resumed.
+    ///
+    /// @param gvr Pointer to the gvr instance for which tracking will be resumed.
     pub fn gvr_resume_tracking(gvr: *mut gvr_context);
 }
 extern "C" {
+
     /// @deprecated Calls to this method can be safely replaced by calls to
-///    gvr_recenter_tracking. This accomplishes the same effects but avoids the
-///    undesirable side-effects of a full reset (temporary loss of tracking
-///    quality).
-///
-/// Resets head tracking.
-///
-/// Only to be used by Cardboard apps. Daydream apps must not call this. On the
-/// Daydream platform, recentering is handled automatically and should never
-/// be triggered programmatically by applications. Hybrid apps that support both
-/// Cardboard and Daydream must only call this function when in Cardboard mode
-/// (that is, when the phone is paired with a Cardboard viewer), never in
-/// Daydream mode.
-///
-/// @param gvr Pointer to the gvr instance for which tracking will be reseted.
+    /// gvr_recenter_tracking. This accomplishes the same effects but avoids the
+    /// undesirable side-effects of a full reset (temporary loss of tracking
+    /// quality).
+    ///
+    /// Resets head tracking.
+    ///
+    /// Only to be used by Cardboard apps. Daydream apps must not call this. On the
+    /// Daydream platform, recentering is handled automatically and should never
+    /// be triggered programmatically by applications. Hybrid apps that support both
+    /// Cardboard and Daydream must only call this function when in Cardboard mode
+    /// (that is, when the phone is paired with a Cardboard viewer), never in
+    /// Daydream mode.
+    ///
+    /// @param gvr Pointer to the gvr instance for which tracking will be reseted.
     pub fn gvr_reset_tracking(gvr: *mut gvr_context);
 }
 extern "C" {
+
     /// Recenters the head orientation (resets the yaw to zero, leaving pitch and
-/// roll unmodified).
-///
-/// Only to be used by Cardboard apps. Daydream apps must not call this. On the
-/// Daydream platform, recentering is handled automatically and should never
-/// be triggered programmatically by applications. Hybrid apps that support both
-/// Cardboard and Daydream must only call this function when in Cardboard mode
-/// (that is, when the phone is paired with a Cardboard viewer), never in
-/// Daydream mode.
-///
-/// @param gvr Pointer to the gvr instance for which tracking will be
-///     recentered.
+    /// roll unmodified).
+    ///
+    /// Only to be used by Cardboard apps. Daydream apps must not call this. On the
+    /// Daydream platform, recentering is handled automatically and should never
+    /// be triggered programmatically by applications. Hybrid apps that support both
+    /// Cardboard and Daydream must only call this function when in Cardboard mode
+    /// (that is, when the phone is paired with a Cardboard viewer), never in
+    /// Daydream mode.
+    ///
+    /// @param gvr Pointer to the gvr instance for which tracking will be
+    /// recentered.
     pub fn gvr_recenter_tracking(gvr: *mut gvr_context);
 }
 extern "C" {
+
     /// Sets the default viewer profile specified by viewer_profile_uri.
-/// The viewer_profile_uri that is passed in will be ignored if a valid
-/// viewer profile has already been stored on the device that the app
-/// is running on.
-///
-/// Note: This function has the potential of blocking for up to 30 seconds for
-/// each redirect if a shortened URI is passed in as argument. It will try to
-/// unroll the shortened URI for a maximum number of 5 times if the redirect
-/// continues. In that case, it is recommended to create a separate thread to
-/// call this function so that other tasks like rendering will not be blocked
-/// on this. The blocking can be avoided if a standard URI is passed in.
-///
-/// @param gvr Pointer to the gvr instance which to set the profile on.
-/// @param viewer_profile_uri A string that contains either the shortened URI or
-///     the standard URI representing the viewer profile that the app should be
-///     using. If the valid viewer profile can be found on the device, the URI
-///     that is passed in will be ignored and nothing will happen. Otherwise,
-///     gvr will look for the viewer profile specified by viewer_profile_uri,
-///     and it will be stored if found. Also, the values will be applied to gvr.
-///     A valid standard URI can be generated from this page:
-///     https://www.google.com/get/cardboard/viewerprofilegenerator/
-/// @return True if the viewer profile specified by viewer_profile_uri was
-///     successfully stored and applied, false otherwise.
-    pub fn gvr_set_default_viewer_profile(gvr: *mut gvr_context,
-                                          viewer_profile_uri:
-                                              *const ::std::os::raw::c_char)
-     -> bool;
+    /// The viewer_profile_uri that is passed in will be ignored if a valid
+    /// viewer profile has already been stored on the device that the app
+    /// is running on.
+    ///
+    /// Note: This function has the potential of blocking for up to 30 seconds for
+    /// each redirect if a shortened URI is passed in as argument. It will try to
+    /// unroll the shortened URI for a maximum number of 5 times if the redirect
+    /// continues. In that case, it is recommended to create a separate thread to
+    /// call this function so that other tasks like rendering will not be blocked
+    /// on this. The blocking can be avoided if a standard URI is passed in.
+    ///
+    /// @param gvr Pointer to the gvr instance which to set the profile on.
+    /// @param viewer_profile_uri A string that contains either the shortened URI or
+    /// the standard URI representing the viewer profile that the app should be
+    /// using. If the valid viewer profile can be found on the device, the URI
+    /// that is passed in will be ignored and nothing will happen. Otherwise,
+    /// gvr will look for the viewer profile specified by viewer_profile_uri,
+    /// and it will be stored if found. Also, the values will be applied to gvr.
+    /// A valid standard URI can be generated from this page:
+    /// https://www.google.com/get/cardboard/viewerprofilegenerator/
+    /// @return True if the viewer profile specified by viewer_profile_uri was
+    /// successfully stored and applied, false otherwise.
+    pub fn gvr_set_default_viewer_profile(
+        gvr: *mut gvr_context,
+        viewer_profile_uri: *const ::std::os::raw::c_char,
+    ) -> bool;
 }
 extern "C" {
+
     /// Refreshes gvr_context with the viewer profile that is stored on the device.
-/// If it can not find the viewer profile, nothing will happen.
-///
-/// @param gvr Pointer to the gvr instance to refresh the profile on.
+    /// If it can not find the viewer profile, nothing will happen.
+    ///
+    /// @param gvr Pointer to the gvr instance to refresh the profile on.
     pub fn gvr_refresh_viewer_profile(gvr: *mut gvr_context);
 }
 extern "C" {
+
     /// Gets the name of the viewer vendor.
-///
-/// @param gvr Pointer to the gvr instance from which to get the vendor.
-/// @return A pointer to the vendor name. May be NULL if no viewer is paired.
-///     WARNING: This method guarantees the validity of the returned pointer
-///     only until the next use of the `gvr` context. The string should be
-///     copied immediately if persistence is required.
-    pub fn gvr_get_viewer_vendor(gvr: *const gvr_context)
-     -> *const ::std::os::raw::c_char;
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the vendor.
+    /// @return A pointer to the vendor name. May be NULL if no viewer is paired.
+    /// WARNING: This method guarantees the validity of the returned pointer
+    /// only until the next use of the `gvr` context. The string should be
+    /// copied immediately if persistence is required.
+    pub fn gvr_get_viewer_vendor(gvr: *const gvr_context) -> *const ::std::os::raw::c_char;
 }
 extern "C" {
+
     /// Gets the name of the viewer model.
-///
-/// @param gvr Pointer to the gvr instance from which to get the name.
-/// @return A pointer to the model name. May be NULL if no viewer is paired.
-///     WARNING: This method guarantees the validity of the returned pointer
-///     only until the next use of the `gvr` context. The string should be
-///     copied immediately if persistence is required.
-    pub fn gvr_get_viewer_model(gvr: *const gvr_context)
-     -> *const ::std::os::raw::c_char;
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the name.
+    /// @return A pointer to the model name. May be NULL if no viewer is paired.
+    /// WARNING: This method guarantees the validity of the returned pointer
+    /// only until the next use of the `gvr` context. The string should be
+    /// copied immediately if persistence is required.
+    pub fn gvr_get_viewer_model(gvr: *const gvr_context) -> *const ::std::os::raw::c_char;
 }
 extern "C" {
+
     /// Gets the type of the viewer, as defined by gvr_viewer_type.
-///
-/// @param gvr Pointer to the gvr instance from which to get the viewer type.
-/// @return The gvr_viewer_type of the currently paired viewer.
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the viewer type.
+    /// @return The gvr_viewer_type of the currently paired viewer.
     pub fn gvr_get_viewer_type(gvr: *const gvr_context) -> i32;
 }
 extern "C" {
+
     /// Gets the transformation matrix to convert from Head Space to Eye Space for
-/// the given eye.
-///
-/// @param gvr Pointer to the gvr instance from which to get the matrix.
-/// @param eye Selected eye type.
-/// @return Transformation matrix from Head Space to selected Eye Space.
-    pub fn gvr_get_eye_from_head_matrix(gvr: *const gvr_context, eye: i32)
-     -> gvr_mat4f;
+    /// the given eye.
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the matrix.
+    /// @param eye Selected eye type.
+    /// @return Transformation matrix from Head Space to selected Eye Space.
+    pub fn gvr_get_eye_from_head_matrix(gvr: *const gvr_context, eye: i32) -> gvr_mat4f;
 }
 extern "C" {
+
     /// Gets the window bounds.
-///
-/// @param gvr Pointer to the gvr instance from which to get the bounds.
-///
-/// @return Window bounds in physical pixels.
+    ///
+    /// @param gvr Pointer to the gvr instance from which to get the bounds.
+    ///
+    /// @return Window bounds in physical pixels.
     pub fn gvr_get_window_bounds(gvr: *const gvr_context) -> gvr_recti;
 }
 extern "C" {
+
     /// Computes the distorted point for a given point in a given eye.  The
-/// distortion inverts the optical distortion caused by the lens for the eye.
-/// Due to chromatic aberration, the distortion is different for each
-/// color channel.
-///
-/// @param gvr Pointer to the gvr instance which will do the computing.
-/// @param eye The gvr_eye type (left or right).
-/// @param uv_in A point in screen eye Viewport Space in [0,1]^2 with (0, 0)
-///     in the lower left corner of the eye's viewport and (1, 1) in the
-///     upper right corner of the eye's viewport.
-/// @param uv_out A pointer to an array of (at least) 3 elements, with each
-///     element being a Point2f representing a point in render texture eye
-///     Viewport Space in [0,1]^2 with (0, 0) in the lower left corner of the
-///     eye's viewport and (1, 1) in the upper right corner of the eye's
-///     viewport.
-///     `uv_out[0]` is the corrected position of `uv_in` for the red channel
-///     `uv_out[1]` is the corrected position of `uv_in` for the green channel
-///     `uv_out[2]` is the corrected position of `uv_in` for the blue channel
-    pub fn gvr_compute_distorted_point(gvr: *const gvr_context, eye: i32,
-                                       uv_in: gvr_vec2f,
-                                       uv_out: *mut gvr_vec2f);
+    /// distortion inverts the optical distortion caused by the lens for the eye.
+    /// Due to chromatic aberration, the distortion is different for each
+    /// color channel.
+    ///
+    /// @param gvr Pointer to the gvr instance which will do the computing.
+    /// @param eye The gvr_eye type (left or right).
+    /// @param uv_in A point in screen eye Viewport Space in [0,1]^2 with (0, 0)
+    /// in the lower left corner of the eye's viewport and (1, 1) in the
+    /// upper right corner of the eye's viewport.
+    /// @param uv_out A pointer to an array of (at least) 3 elements, with each
+    /// element being a Point2f representing a point in render texture eye
+    /// Viewport Space in [0,1]^2 with (0, 0) in the lower left corner of the
+    /// eye's viewport and (1, 1) in the upper right corner of the eye's
+    /// viewport.
+    /// `uv_out[0]` is the corrected position of `uv_in` for the red channel
+    /// `uv_out[1]` is the corrected position of `uv_in` for the green channel
+    /// `uv_out[2]` is the corrected position of `uv_in` for the blue channel
+    pub fn gvr_compute_distorted_point(
+        gvr: *const gvr_context,
+        eye: i32,
+        uv_in: gvr_vec2f,
+        uv_out: *mut gvr_vec2f,
+    );
 }
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct gvr_controller_context_ {
-    _unused: [u8; 0],
-}
-/// Represents a Daydream Controller API object, used to invoke the
-/// Daydream Controller API.
-pub type gvr_controller_context = gvr_controller_context_;
 extern "C" {
+
     /// Returns the default features for the controller API.
-///
-/// @return The set of default features, as bit flags (an OR'ed combination of
-///     the GVR_CONTROLLER_ENABLE_* feature flags).
+    ///
+    /// @return The set of default features, as bit flags (an OR'ed combination of
+    /// the GVR_CONTROLLER_ENABLE_* feature flags).
     pub fn gvr_controller_get_default_options() -> i32;
 }
 extern "C" {
+
     /// Creates and initializes a gvr_controller_context instance which can be used
-/// to invoke the Daydream Controller API functions. Important: after creation
-/// the API will be in the paused state (the controller will be inactive).
-/// You must call gvr_controller_resume() explicitly (typically, in your Android
-/// app's onResume() callback).
-///
-/// @param options The API options. To get the defaults, use
-///     gvr_controller_get_default_options().
-/// @param context The GVR Context object to sync with (optional).
-///     This can be nullptr. If provided, the context's state will
-///     be synchronized with the controller's state where possible. For
-///     example, when the user recenters the controller, this will
-///     automatically recenter head tracking as well.
-///     WARNING: the caller is responsible for making sure the pointer
-///     remains valid for the lifetime of this object.
-/// @return A pointer to the initialized API, or NULL if an error occurs.
-    pub fn gvr_controller_create_and_init(options: i32,
-                                          context: *mut gvr_context)
-     -> *mut gvr_controller_context;
+    /// to invoke the Daydream Controller API functions. Important: after creation
+    /// the API will be in the paused state (the controller will be inactive).
+    /// You must call gvr_controller_resume() explicitly (typically, in your Android
+    /// app's onResume() callback).
+    ///
+    /// @param options The API options. To get the defaults, use
+    /// gvr_controller_get_default_options().
+    /// @param context The GVR Context object to sync with (optional).
+    /// This can be nullptr. If provided, the context's state will
+    /// be synchronized with the controller's state where possible. For
+    /// example, when the user recenters the controller, this will
+    /// automatically recenter head tracking as well.
+    /// WARNING: the caller is responsible for making sure the pointer
+    /// remains valid for the lifetime of this object.
+    /// @return A pointer to the initialized API, or NULL if an error occurs.
+    pub fn gvr_controller_create_and_init(
+        options: i32,
+        context: *mut gvr_context,
+    ) -> *mut gvr_controller_context;
 }
 extern "C" {
+
     /// Destroys a gvr_controller_context that was previously created with
-/// gvr_controller_init.
-///
-/// @param api Pointer to a pointer to a gvr_controller_context. The pointer
-///     will be set to NULL after destruction.
+    /// gvr_controller_init.
+    ///
+    /// @param api Pointer to a pointer to a gvr_controller_context. The pointer
+    /// will be set to NULL after destruction.
     pub fn gvr_controller_destroy(api: *mut *mut gvr_controller_context);
 }
 extern "C" {
+
     /// Pauses the controller, possibly releasing resources.
-/// Call this when your app/game loses focus.
-/// Calling this when already paused is a no-op.
-/// Thread-safe (call from any thread).
-///
-/// @param api Pointer to a gvr_controller_context.
+    /// Call this when your app/game loses focus.
+    /// Calling this when already paused is a no-op.
+    /// Thread-safe (call from any thread).
+    ///
+    /// @param api Pointer to a gvr_controller_context.
     pub fn gvr_controller_pause(api: *mut gvr_controller_context);
 }
 extern "C" {
+
     /// Resumes the controller. Call this when your app/game regains focus.
-/// Calling this when already resumed is a no-op.
-/// Thread-safe (call from any thread).
-///
-/// @param api Pointer to a gvr_controller_context.
+    /// Calling this when already resumed is a no-op.
+    /// Thread-safe (call from any thread).
+    ///
+    /// @param api Pointer to a gvr_controller_context.
     pub fn gvr_controller_resume(api: *mut gvr_controller_context);
 }
 extern "C" {
+
     /// Returns the number (N) of controllers currently available.
-///
-/// Each controller can be identified by an index in the range [0, N), which
-/// can be passed to gvr_controller_state_update to set a gvr_controller_state
-/// instance to the state of the controller for that index.
-///
-/// @param api Pointer to a gvr_controller_context.
-/// @return The number of controllers currently available.
+    ///
+    /// Each controller can be identified by an index in the range [0, N), which
+    /// can be passed to gvr_controller_state_update to set a gvr_controller_state
+    /// instance to the state of the controller for that index.
+    ///
+    /// @param api Pointer to a gvr_controller_context.
+    /// @return The number of controllers currently available.
     pub fn gvr_controller_get_count(api: *mut gvr_controller_context) -> i32;
 }
 extern "C" {
+
     /// Convenience to convert an API status code to string. The returned pointer
-/// is static and valid throughout the lifetime of the application.
-///
-/// @param status The gvr_controller_api_status to convert to string.
-/// @return A pointer to a string that describes the value.
-    pub fn gvr_controller_api_status_to_string(status: i32)
-     -> *const ::std::os::raw::c_char;
+    /// is static and valid throughout the lifetime of the application.
+    ///
+    /// @param status The gvr_controller_api_status to convert to string.
+    /// @return A pointer to a string that describes the value.
+    pub fn gvr_controller_api_status_to_string(status: i32) -> *const ::std::os::raw::c_char;
 }
 extern "C" {
+
     /// Convenience to convert an connection state to string. The returned pointer
-/// is static and valid throughout the lifetime of the application.
-///
-/// @param state The state to convert to string.
-/// @return A pointer to a string that describes the value.
-    pub fn gvr_controller_connection_state_to_string(state: i32)
-     -> *const ::std::os::raw::c_char;
+    /// is static and valid throughout the lifetime of the application.
+    ///
+    /// @param state The state to convert to string.
+    /// @return A pointer to a string that describes the value.
+    pub fn gvr_controller_connection_state_to_string(state: i32) -> *const ::std::os::raw::c_char;
 }
 extern "C" {
+
     /// Convenience to convert an connection state to string. The returned pointer
-/// is static and valid throughout the lifetime of the application.
-///
-/// @param button The gvr_controller_button to convert to string.
-/// @return A pointer to a string that describes the value.
-    pub fn gvr_controller_button_to_string(button: i32)
-     -> *const ::std::os::raw::c_char;
+    /// is static and valid throughout the lifetime of the application.
+    ///
+    /// @param button The gvr_controller_button to convert to string.
+    /// @return A pointer to a string that describes the value.
+    pub fn gvr_controller_button_to_string(button: i32) -> *const ::std::os::raw::c_char;
 }
 extern "C" {
+
     /// Creates a gvr_controller_state.
-///
-/// @return A gvr_controller_state instance that will receive state updates for
-///     a controller.
+    ///
+    /// @return A gvr_controller_state instance that will receive state updates for
+    /// a controller.
     pub fn gvr_controller_state_create() -> *mut gvr_controller_state;
 }
 extern "C" {
+
     /// Destroys and sets to NULL a gvr_controller_state that was previously
-/// created with gvr_controller_state_create.
-///
-/// @param state Pointer to a pointer to the controller state to be destroyed
-///     and nulled.
-    pub fn gvr_controller_state_destroy(state:
-                                            *mut *mut gvr_controller_state);
+    /// created with gvr_controller_state_create.
+    ///
+    /// @param state Pointer to a pointer to the controller state to be destroyed
+    /// and nulled.
+    pub fn gvr_controller_state_destroy(state: *mut *mut gvr_controller_state);
 }
 extern "C" {
+
     /// Updates the controller state. Reading the controller state is not a
-/// const getter: it has side-effects. In particular, some of the
-/// gvr_controller_state fields (the ones documented as "transient") represent
-/// one-time events and will be true for only one read operation, and false
-/// in subsequent reads.
-///
-/// If the controller_index passed here does not correspond to an available
-/// controller (i.e. the controller_index is not in the range [0,N) where N is
-/// the number of controllers returned by gvr_controller_get_count), then the
-/// values of fields set for the gvr_controller_state instance passed in here
-/// are undefined.
-///
-/// The index of each controller device will remain constant the same across
-/// controller disconnects/connects during a given VR session. If the
-/// underlying set of controllers expected to be available to applications has
-/// changed, the gvr_controller_context may no longer be valid, and must be
-/// recreated by the applicaion when notified of this.
-///
-/// @param api Pointer to a gvr_controller_context.
-/// @param controller_index The index of the controller to update the state
-///     from.
-/// @param out_state A pointer where the controller's state
-///     is to be written. This must have been allocated with
-///     gvr_controller_state_create().
-    pub fn gvr_controller_state_update(api: *mut gvr_controller_context,
-                                       controller_index: i32,
-                                       out_state: *mut gvr_controller_state);
+    /// const getter: it has side-effects. In particular, some of the
+    /// gvr_controller_state fields (the ones documented as "transient") represent
+    /// one-time events and will be true for only one read operation, and false
+    /// in subsequent reads.
+    ///
+    /// If the controller_index passed here does not correspond to an available
+    /// controller (i.e. the controller_index is not in the range [0,N) where N is
+    /// the number of controllers returned by gvr_controller_get_count), then the
+    /// values of fields set for the gvr_controller_state instance passed in here
+    /// are undefined.
+    ///
+    /// The index of each controller device will remain constant the same across
+    /// controller disconnects/connects during a given VR session. If the
+    /// underlying set of controllers expected to be available to applications has
+    /// changed, the gvr_controller_context may no longer be valid, and must be
+    /// recreated by the applicaion when notified of this.
+    ///
+    /// @param api Pointer to a gvr_controller_context.
+    /// @param controller_index The index of the controller to update the state
+    /// from.
+    /// @param out_state A pointer where the controller's state
+    /// is to be written. This must have been allocated with
+    /// gvr_controller_state_create().
+    pub fn gvr_controller_state_update(
+        api: *mut gvr_controller_context,
+        controller_index: i32,
+        out_state: *mut gvr_controller_state,
+    );
 }
 extern "C" {
+
     /// Sets up arm model with user's handedness, gaze behavior and head rotation.
-/// This setting needs to be applied for every frame. User preferences of
-/// handedness and gaze behavior can be changed as needed in a sequence of
-/// frames. This needs to be called before gvr_controller_state_update() to
-/// apply arm model. GVR_CONTROLLER_ENABLE_ARM_MODEL flag needs to be enabled
-/// to apply arm model.
-///
-/// When multiple controllers are configured, this arm model will be applied to
-/// the controller at the given controller_index, if one exists.
-///
-/// @param api Pointer to a gvr_controller_context.
-/// @param controller_index Index of the controller to apply the arm model to.
-/// @param handedness User's preferred handedness (GVR_CONTROLLER_RIGHT_HANDED
-///     or GVR_CONTROLLER_LEFT_HANDED). Arm model will assume this is the hand
-///     that is holding the controller and position the arm accordingly.
-/// @param behavior User's preferred gaze behavior (SYNC_GAZE / FOLLOW_GAZE
-///     / IGNORE_GAZE). Arm model uses this to determine how the body rotates as
-///     gaze direction (i.e. head rotation) changes.
-/// @param head_space_from_start_space_rotation User's head rotation with
-///     respect to start space.
-    pub fn gvr_controller_apply_arm_model(api: *mut gvr_controller_context,
-                                          controller_index: i32,
-                                          handedness: i32, behavior: i32,
-                                          head_space_from_start_space_rotation:
-                                              gvr_mat4f);
+    /// This setting needs to be applied for every frame. User preferences of
+    /// handedness and gaze behavior can be changed as needed in a sequence of
+    /// frames. This needs to be called before gvr_controller_state_update() to
+    /// apply arm model. GVR_CONTROLLER_ENABLE_ARM_MODEL flag needs to be enabled
+    /// to apply arm model. The controller position computed with arm model is
+    /// relative to the head origin. If using the opt-in neck model, the effective
+    /// eye position after using vr_apply_neck_model() is shifted forward from the
+    /// head origin by the neck-to-eye distance (8cm) when the head is in
+    /// neutral position, and a matching forward offset should be applied to the
+    /// controller position to compensate.
+    ///
+    /// When multiple controllers are configured, this arm model will be applied to
+    /// the controller at the given controller_index, if one exists.
+    ///
+    /// @param api Pointer to a gvr_controller_context.
+    /// @param controller_index Index of the controller to apply the arm model to.
+    /// @param handedness User's preferred handedness (GVR_CONTROLLER_RIGHT_HANDED
+    /// or GVR_CONTROLLER_LEFT_HANDED). Arm model will assume this is the hand
+    /// that is holding the controller and position the arm accordingly.
+    /// @param behavior User's preferred gaze behavior (SYNC_GAZE / FOLLOW_GAZE
+    /// / IGNORE_GAZE). Arm model uses this to determine how the body rotates as
+    /// gaze direction (i.e. head rotation) changes.
+    /// @param head_space_from_start_space_rotation User's head rotation with
+    /// respect to start space.
+    pub fn gvr_controller_apply_arm_model(
+        api: *mut gvr_controller_context,
+        controller_index: i32,
+        handedness: i32,
+        behavior: i32,
+        head_space_from_start_space_rotation: gvr_mat4f,
+    );
 }
 extern "C" {
+
     /// Gets the API status of the controller state. Returns one of the
-/// gvr_controller_api_status variants, but returned as an int32_t for ABI
-/// compatibility.
-///
-/// @param state The controller state to get the status from.
-/// @return The status code from the controller state, as a
-///     gvr_controller_api_status variant.
-    pub fn gvr_controller_state_get_api_status(state:
-                                                   *const gvr_controller_state)
-     -> i32;
+    /// gvr_controller_api_status variants, but returned as an int32_t for ABI
+    /// compatibility.
+    ///
+    /// @param state The controller state to get the status from.
+    /// @return The status code from the controller state, as a
+    /// gvr_controller_api_status variant.
+    pub fn gvr_controller_state_get_api_status(state: *const gvr_controller_state) -> i32;
 }
 extern "C" {
+
     /// Gets the connection state of the controller. Returns one of the
-/// gvr_controller_connection_state variants, but returned as an int32_t for ABI
-/// compatibility.
-///
-/// @param state The controller state to get the connection state from.
-/// @return The connection state from the controller state as a
-///     gvr_controller_connection_state variant.
-    pub fn gvr_controller_state_get_connection_state(state:
-                                                         *const gvr_controller_state)
-     -> i32;
+    /// gvr_controller_connection_state variants, but returned as an int32_t for ABI
+    /// compatibility.
+    ///
+    /// @param state The controller state to get the connection state from.
+    /// @return The connection state from the controller state as a
+    /// gvr_controller_connection_state variant.
+    pub fn gvr_controller_state_get_connection_state(state: *const gvr_controller_state) -> i32;
 }
 extern "C" {
+
     /// Returns the current controller orientation, in Start Space. The Start Space
-/// is the same space as the headset space and has these three axes
-/// (right-handed):
-///
-/// * The positive X axis points to the right.
-/// * The positive Y axis points upwards.
-/// * The positive Z axis points backwards.
-///
-/// The definition of "backwards" and "to the right" are based on the position
-/// of the controller when tracking started. For Daydream, this is when the
-/// controller was first connected in the "Connect your Controller" screen
-/// which is shown when the user enters VR.
-///
-/// The definition of "upwards" is given by gravity (away from the pull of
-/// gravity). This API may not work in environments without gravity, such
-/// as space stations or near the center of the Earth.
-///
-/// Since the coordinate system is right-handed, rotations are given by the
-/// right-hand rule. For example, rotating the controller counter-clockwise
-/// on a table top as seen from above means a positive rotation about the
-/// Y axis, while clockwise would mean negative.
-///
-/// Note that this is the Start Space for the *controller*, which initially
-/// coincides with the Start Space for the headset, but they may diverge over
-/// time due to controller/headset drift. A recentering operation will bring
-/// the two spaces back into sync.
-///
-/// Remember that a unit quaternion expresses a rotation. Given a rotation of
-/// theta radians about the (x, y, z) axis, the corresponding quaternion (in
-/// xyzw order) is:
-///
-///     (x * sin(theta/2), y * sin(theta/2), z * sin(theta/2), cos(theta/2))
-///
-/// Here are some examples of orientations of the controller and their
-/// corresponding quaternions, all given in xyzw order:
-///
-///   * Initial pose, pointing forward and lying flat on a surface: identity
-///     quaternion (0, 0, 0, 1). Corresponds to "no rotation".
-///
-///   * Flat on table, rotated 90 degrees counter-clockwise: (0, 0.7071, 0,
-///     0.7071). Corresponds to a +90 degree rotation about the Y axis.
-///
-///   * Flat on table, rotated 90 degrees clockwise: (0, -0.7071, 0, 0.7071).
-///     Corresponds to a -90 degree rotation about the Y axis.
-///
-///   * Flat on table, rotated 180 degrees (pointing backwards): (0, 1, 0, 0).
-///     Corresponds to a 180 degree rotation about the Y axis.
-///
-///   * Pointing straight up towards the sky: (0.7071, 0, 0, 0.7071).
-///     Corresponds to a +90 degree rotation about the X axis.
-///
-///   * Pointing straight down towards the ground: (-0.7071, 0, 0, 0.7071).
-///     Corresponds to a -90 degree rotation about the X axis.
-///
-///   * Banked 90 degrees to the left: (0, 0, 0.7071, 0.7071). Corresponds
-///     to a +90 degree rotation about the Z axis.
-///
-///   * Banked 90 degrees to the right: (0, 0, -0.7071, 0.7071). Corresponds
-///     to a -90 degree rotation about the Z axis.
-///
-/// @param state The controller state to get the orientation from.
-/// @return The unit quaternion orientation from the controller state.
-    pub fn gvr_controller_state_get_orientation(state:
-                                                    *const gvr_controller_state)
-     -> gvr_quatf;
+    /// is the same space as the headset space and has these three axes
+    /// (right-handed):
+    ///
+    /// * The positive X axis points to the right.
+    /// * The positive Y axis points upwards.
+    /// * The positive Z axis points backwards.
+    ///
+    /// The definition of "backwards" and "to the right" are based on the position
+    /// of the controller when tracking started. For Daydream, this is when the
+    /// controller was first connected in the "Connect your Controller" screen
+    /// which is shown when the user enters VR.
+    ///
+    /// The definition of "upwards" is given by gravity (away from the pull of
+    /// gravity). This API may not work in environments without gravity, such
+    /// as space stations or near the center of the Earth.
+    ///
+    /// Since the coordinate system is right-handed, rotations are given by the
+    /// right-hand rule. For example, rotating the controller counter-clockwise
+    /// on a table top as seen from above means a positive rotation about the
+    /// Y axis, while clockwise would mean negative.
+    ///
+    /// Note that this is the Start Space for the *controller*, which initially
+    /// coincides with the Start Space for the headset, but they may diverge over
+    /// time due to controller/headset drift. A recentering operation will bring
+    /// the two spaces back into sync.
+    ///
+    /// Remember that a unit quaternion expresses a rotation. Given a rotation of
+    /// theta radians about the (x, y, z) axis, the corresponding quaternion (in
+    /// xyzw order) is:
+    ///
+    /// (x * sin(theta/2), y * sin(theta/2), z * sin(theta/2), cos(theta/2))
+    ///
+    /// Here are some examples of orientations of the controller and their
+    /// corresponding quaternions, all given in xyzw order:
+    ///
+    /// * Initial pose, pointing forward and lying flat on a surface: identity
+    /// quaternion (0, 0, 0, 1). Corresponds to "no rotation".
+    ///
+    /// * Flat on table, rotated 90 degrees counter-clockwise: (0, 0.7071, 0,
+    /// 0.7071). Corresponds to a +90 degree rotation about the Y axis.
+    ///
+    /// * Flat on table, rotated 90 degrees clockwise: (0, -0.7071, 0, 0.7071).
+    /// Corresponds to a -90 degree rotation about the Y axis.
+    ///
+    /// * Flat on table, rotated 180 degrees (pointing backwards): (0, 1, 0, 0).
+    /// Corresponds to a 180 degree rotation about the Y axis.
+    ///
+    /// * Pointing straight up towards the sky: (0.7071, 0, 0, 0.7071).
+    /// Corresponds to a +90 degree rotation about the X axis.
+    ///
+    /// * Pointing straight down towards the ground: (-0.7071, 0, 0, 0.7071).
+    /// Corresponds to a -90 degree rotation about the X axis.
+    ///
+    /// * Banked 90 degrees to the left: (0, 0, 0.7071, 0.7071). Corresponds
+    /// to a +90 degree rotation about the Z axis.
+    ///
+    /// * Banked 90 degrees to the right: (0, 0, -0.7071, 0.7071). Corresponds
+    /// to a -90 degree rotation about the Z axis.
+    ///
+    /// @param state The controller state to get the orientation from.
+    /// @return The unit quaternion orientation from the controller state.
+    pub fn gvr_controller_state_get_orientation(state: *const gvr_controller_state) -> gvr_quatf;
 }
 extern "C" {
+
     /// Returns the current controller gyro reading, in Start Space.
-///
-/// The gyro measures the controller's angular speed in radians per second.
-/// Note that this is an angular *speed*, so it reflects how fast the
-/// controller's orientation is changing with time.
-/// In particular, if the controller is not being rotated, the angular speed
-/// will be zero on all axes, regardless of the current pose.
-///
-/// The axes are in the controller's device space. Specifically:
-///
-///    * The X axis points to the right of the controller.
-///    * The Y axis points upwards perpendicular to the top surface of the
-///      controller.
-///    * The Z axis points backwards along the body of the controller,
-///      towards its rear, where the charging port is.
-///
-/// As usual in a right-handed coordinate system, the sign of the angular
-/// velocity is given by the right-hand rule. So, for example:
-///
-///    * If the controller is flat on a table top spinning counter-clockwise
-///      as seen from above, you will read a positive angular velocity
-///      about the Y axis. Clockwise would be negative.
-///    * If the controller is initially pointing forward and lying flat and
-///      is then gradually angled up so that its tip points towards the sky,
-///      it will report a positive angular velocity about the X axis during
-///      that motion. Likewise, angling it down will report a negative angular
-///      velocity about the X axis.
-///    * If the controller is banked (rolled) to the right, this will
-///      report a negative angular velocity about the Z axis during the
-///      motion (remember the Z axis points backwards along the controller).
-///      Banking to the left will report a positive angular velocity about
-///      the Z axis.
-///
-/// @param state The controller state to get the gyro reading from.
-/// @return The gyro reading from the controller state.
-    pub fn gvr_controller_state_get_gyro(state: *const gvr_controller_state)
-     -> gvr_vec3f;
+    ///
+    /// The gyro measures the controller's angular speed in radians per second.
+    /// Note that this is an angular *speed*, so it reflects how fast the
+    /// controller's orientation is changing with time.
+    /// In particular, if the controller is not being rotated, the angular speed
+    /// will be zero on all axes, regardless of the current pose.
+    ///
+    /// The axes are in the controller's device space. Specifically:
+    ///
+    /// * The X axis points to the right of the controller.
+    /// * The Y axis points upwards perpendicular to the top surface of the
+    /// controller.
+    /// * The Z axis points backwards along the body of the controller,
+    /// towards its rear, where the charging port is.
+    ///
+    /// As usual in a right-handed coordinate system, the sign of the angular
+    /// velocity is given by the right-hand rule. So, for example:
+    ///
+    /// * If the controller is flat on a table top spinning counter-clockwise
+    /// as seen from above, you will read a positive angular velocity
+    /// about the Y axis. Clockwise would be negative.
+    /// * If the controller is initially pointing forward and lying flat and
+    /// is then gradually angled up so that its tip points towards the sky,
+    /// it will report a positive angular velocity about the X axis during
+    /// that motion. Likewise, angling it down will report a negative angular
+    /// velocity about the X axis.
+    /// * If the controller is banked (rolled) to the right, this will
+    /// report a negative angular velocity about the Z axis during the
+    /// motion (remember the Z axis points backwards along the controller).
+    /// Banking to the left will report a positive angular velocity about
+    /// the Z axis.
+    ///
+    /// @param state The controller state to get the gyro reading from.
+    /// @return The gyro reading from the controller state.
+    pub fn gvr_controller_state_get_gyro(state: *const gvr_controller_state) -> gvr_vec3f;
 }
 extern "C" {
+
     /// Current (latest) controller accelerometer reading, in Start Space.
-///
-/// The accelerometer indicates the direction in which the controller feels
-/// an acceleration, including gravity. The reading is given in meters
-/// per second squared (m/s^2). The axes are the same as for the gyro.
-/// To have an intuition for the signs used in the accelerometer, it is useful
-/// to imagine that, when at rest, the controller is being "pushed" by a
-/// force opposite to gravity. It is as if, by the equivalency princle, it were
-/// on a frame of reference that is accelerating in the opposite direction to
-/// gravity. For example:
-///
-///   * If the controller is lying flat on a table top, it will read a positive
-///     acceleration of about 9.8 m/s^2 along the Y axis, corresponding to
-///     the acceleration of gravity (as if the table were pushing the controller
-///     upwards at 9.8 m/s^2 to counteract gravity).
-///   * If, in that situation, the controller is now accelerated upwards at
-///     3.0 m/s^2, then the reading will be 12.8 m/s^2 along the Y axis,
-///     since the controller will now feel a stronger acceleration corresponding
-///     to the 9.8 m/s^2 plus the upwards push of 3.0 m/s^2.
-///   * If, the controller is accelerated downwards at 5.0 m/s^2, then the
-///     reading will now be 4.8 m/s^2 along the Y axis, since the controller
-///     will now feel a weaker acceleration (as the acceleration is giving in
-///     to gravity).
-///   * If you were to give in to gravity completely, letting the controller
-///     free fall towards the ground, it will read 0 on all axes, as there
-///     will be no force acting on the controller. (Please do not put your
-///     controller in a free-fall situation. This is just a theoretical
-///     example.)
-///
-/// @param state The controller state to get the accelerometer reading from.
-/// @return The accelerometer reading from the controller state.
-    pub fn gvr_controller_state_get_accel(state: *const gvr_controller_state)
-     -> gvr_vec3f;
+    ///
+    /// The accelerometer indicates the direction in which the controller feels
+    /// an acceleration, including gravity. The reading is given in meters
+    /// per second squared (m/s^2). The axes are the same as for the gyro.
+    /// To have an intuition for the signs used in the accelerometer, it is useful
+    /// to imagine that, when at rest, the controller is being "pushed" by a
+    /// force opposite to gravity. It is as if, by the equivalency princle, it were
+    /// on a frame of reference that is accelerating in the opposite direction to
+    /// gravity. For example:
+    ///
+    /// * If the controller is lying flat on a table top, it will read a positive
+    /// acceleration of about 9.8 m/s^2 along the Y axis, corresponding to
+    /// the acceleration of gravity (as if the table were pushing the controller
+    /// upwards at 9.8 m/s^2 to counteract gravity).
+    /// * If, in that situation, the controller is now accelerated upwards at
+    /// 3.0 m/s^2, then the reading will be 12.8 m/s^2 along the Y axis,
+    /// since the controller will now feel a stronger acceleration corresponding
+    /// to the 9.8 m/s^2 plus the upwards push of 3.0 m/s^2.
+    /// * If, the controller is accelerated downwards at 5.0 m/s^2, then the
+    /// reading will now be 4.8 m/s^2 along the Y axis, since the controller
+    /// will now feel a weaker acceleration (as the acceleration is giving in
+    /// to gravity).
+    /// * If you were to give in to gravity completely, letting the controller
+    /// free fall towards the ground, it will read 0 on all axes, as there
+    /// will be no force acting on the controller. (Please do not put your
+    /// controller in a free-fall situation. This is just a theoretical
+    /// example.)
+    ///
+    /// @param state The controller state to get the accelerometer reading from.
+    /// @return The accelerometer reading from the controller state.
+    pub fn gvr_controller_state_get_accel(state: *const gvr_controller_state) -> gvr_vec3f;
 }
 extern "C" {
+
     /// Returns whether the user is touching the touchpad.
-///
-/// @param state The controller state to get the touchpad being touched state
-///     from.
-/// @return True iff the user is touching the controller, false otherwise.
-    pub fn gvr_controller_state_is_touching(state:
-                                                *const gvr_controller_state)
-     -> bool;
+    ///
+    /// @param state The controller state to get the touchpad being touched state
+    /// from.
+    /// @return True iff the user is touching the controller, false otherwise.
+    pub fn gvr_controller_state_is_touching(state: *const gvr_controller_state) -> bool;
 }
 extern "C" {
+
     /// If the user is touching the touchpad, this returns the touch position in
-/// normalized coordinates, where (0,0) is the top-left of the touchpad
-/// and (1,1) is the bottom right. If the user is not touching the touchpad,
-/// then this is the position of the last touch.
-///
-/// @param state The controller state to get the touchpad touch position from.
-/// @return The touchpad touch position in normalized coordinates iff the user
-///     is touching the toucpad.  The last touched coordinate otherwise.
-    pub fn gvr_controller_state_get_touch_pos(state:
-                                                  *const gvr_controller_state)
-     -> gvr_vec2f;
+    /// normalized coordinates, where (0,0) is the top-left of the touchpad
+    /// and (1,1) is the bottom right. If the user is not touching the touchpad,
+    /// then this is the position of the last touch.
+    ///
+    /// @param state The controller state to get the touchpad touch position from.
+    /// @return The touchpad touch position in normalized coordinates iff the user
+    /// is touching the toucpad.  The last touched coordinate otherwise.
+    pub fn gvr_controller_state_get_touch_pos(state: *const gvr_controller_state) -> gvr_vec2f;
 }
 extern "C" {
+
     /// Returns true iff user just started touching touchpad.  This is a transient
-/// event (i.e., it is true for only one frame after the event).
-///
-/// @param state The controller state to get the touch down data from.
-/// @return True iff the user just started touching the touchpad, false
-///     otherwise.
-    pub fn gvr_controller_state_get_touch_down(state:
-                                                   *const gvr_controller_state)
-     -> bool;
+    /// event (i.e., it is true for only one frame after the event).
+    ///
+    /// @param state The controller state to get the touch down data from.
+    /// @return True iff the user just started touching the touchpad, false
+    /// otherwise.
+    pub fn gvr_controller_state_get_touch_down(state: *const gvr_controller_state) -> bool;
 }
 extern "C" {
+
     /// Returns true if user just stopped touching touchpad.  This is a transient
-/// event: (i.e., it is true for only one frame after the event).
-///
-/// @param state The controller state to get the touch up data from.
-/// @return True iff the user just released the touchpad, false otherwise.
-    pub fn gvr_controller_state_get_touch_up(state:
-                                                 *const gvr_controller_state)
-     -> bool;
+    /// event: (i.e., it is true for only one frame after the event).
+    ///
+    /// @param state The controller state to get the touch up data from.
+    /// @return True iff the user just released the touchpad, false otherwise.
+    pub fn gvr_controller_state_get_touch_up(state: *const gvr_controller_state) -> bool;
 }
 extern "C" {
+
     /// Returns true if a recenter operation just ended.  This is a transient event:
-/// (i.e., it is true only for one frame after the recenter ended). If this is
-/// true then the `orientation` field is already relative to the new center.
-///
-/// @param state The controller state to get the recenter information from.
-/// @return True iff a recenter operation just ended, false otherwise.
-    pub fn gvr_controller_state_get_recentered(state:
-                                                   *const gvr_controller_state)
-     -> bool;
+    /// (i.e., it is true only for one frame after the recenter ended). If this is
+    /// true then the `orientation` field is already relative to the new center.
+    ///
+    /// @param state The controller state to get the recenter information from.
+    /// @return True iff a recenter operation just ended, false otherwise.
+    pub fn gvr_controller_state_get_recentered(state: *const gvr_controller_state) -> bool;
 }
 extern "C" {
+
     /// @deprecated Use gvr_controller_state_get_recentered instead.
-///
-/// Returns whether the recenter flow is currently in progress.
-///
-/// @param state The controller state to get the recenter information from.
-/// @return True iff recenter flow is in progress, false otherwise.
-    pub fn gvr_controller_state_get_recentering(state:
-                                                    *const gvr_controller_state)
-     -> bool;
+    ///
+    /// Returns whether the recenter flow is currently in progress.
+    ///
+    /// @param state The controller state to get the recenter information from.
+    /// @return True iff recenter flow is in progress, false otherwise.
+    pub fn gvr_controller_state_get_recentering(state: *const gvr_controller_state) -> bool;
 }
 extern "C" {
+
     /// Returns whether the given button is currently pressed.
-///
-/// @param state The controller state to get the button state from.
-/// @return True iff the button specified by the 'state' parameter is pressed,
-///     false otherwise.
-    pub fn gvr_controller_state_get_button_state(state:
-                                                     *const gvr_controller_state,
-                                                 button: i32) -> bool;
+    ///
+    /// @param state The controller state to get the button state from.
+    /// @return True iff the button specified by the 'state' parameter is pressed,
+    /// false otherwise.
+    pub fn gvr_controller_state_get_button_state(
+        state: *const gvr_controller_state,
+        button: i32,
+    ) -> bool;
 }
 extern "C" {
+
     /// Returns whether the given button was just pressed (transient).
-///
-/// @param state The controller state to get the button pressed data from.
-/// @return True iff the button specified by the 'state' parameter was just
-///     pressed, false otherwise.
-    pub fn gvr_controller_state_get_button_down(state:
-                                                    *const gvr_controller_state,
-                                                button: i32) -> bool;
+    ///
+    /// @param state The controller state to get the button pressed data from.
+    /// @return True iff the button specified by the 'state' parameter was just
+    /// pressed, false otherwise.
+    pub fn gvr_controller_state_get_button_down(
+        state: *const gvr_controller_state,
+        button: i32,
+    ) -> bool;
 }
 extern "C" {
+
     /// Returns whether the given button was just released (transient).
-///
-/// @param state The controller state to get the button released data from.
-/// @return True iff the button specified by the 'state' parameter was just
-///     released, false otherwise.
-    pub fn gvr_controller_state_get_button_up(state:
-                                                  *const gvr_controller_state,
-                                              button: i32) -> bool;
+    ///
+    /// @param state The controller state to get the button released data from.
+    /// @return True iff the button specified by the 'state' parameter was just
+    /// released, false otherwise.
+    pub fn gvr_controller_state_get_button_up(
+        state: *const gvr_controller_state,
+        button: i32,
+    ) -> bool;
 }
 extern "C" {
+
     /// Returns the timestamp (nanos) when the last orientation event was received.
-///
-/// @param state The controller state to get the last orientation event
-///     timestamp from.
-/// @return A 64-bit integer representation of the timestamp when the last
-///     orientation event was recieved.
-    pub fn gvr_controller_state_get_last_orientation_timestamp(state:
-                                                                   *const gvr_controller_state)
-     -> i64;
+    ///
+    /// @param state The controller state to get the last orientation event
+    /// timestamp from.
+    /// @return A 64-bit integer representation of the timestamp when the last
+    /// orientation event was recieved.
+    pub fn gvr_controller_state_get_last_orientation_timestamp(
+        state: *const gvr_controller_state,
+    ) -> i64;
 }
 extern "C" {
+
     /// Returns the timestamp (nanos) when the last gyro event was received.
-///
-/// @param state The controller state to get the last gyro event timestamp from.
-/// @return A 64-bit integer representation of the timestamp when the last
-///     gyro event was recieved.
-    pub fn gvr_controller_state_get_last_gyro_timestamp(state:
-                                                            *const gvr_controller_state)
-     -> i64;
+    ///
+    /// @param state The controller state to get the last gyro event timestamp from.
+    /// @return A 64-bit integer representation of the timestamp when the last
+    /// gyro event was recieved.
+    pub fn gvr_controller_state_get_last_gyro_timestamp(state: *const gvr_controller_state) -> i64;
 }
 extern "C" {
+
     /// Returns the timestamp (nanos) when the last accelerometer event was
-/// received.
-///
-/// @param state The controller state to get the last accelerometer timestamp
-///     from.
-/// @return A 64-bit integer representation of the timestamp when the last
-///     accelerometer event was recieved.
-    pub fn gvr_controller_state_get_last_accel_timestamp(state:
-                                                             *const gvr_controller_state)
-     -> i64;
+    /// received.
+    ///
+    /// @param state The controller state to get the last accelerometer timestamp
+    /// from.
+    /// @return A 64-bit integer representation of the timestamp when the last
+    /// accelerometer event was recieved.
+    pub fn gvr_controller_state_get_last_accel_timestamp(state: *const gvr_controller_state)
+        -> i64;
 }
 extern "C" {
+
     /// Returns the timestamp (nanos) when the last touch event was received.
-///
-/// @param state The controller state to get the last touch timestamp from.
-/// @return A 64-bit integer representation of the timestamp when the last
-///     touch event was recieved.
-    pub fn gvr_controller_state_get_last_touch_timestamp(state:
-                                                             *const gvr_controller_state)
-     -> i64;
+    ///
+    /// @param state The controller state to get the last touch timestamp from.
+    /// @return A 64-bit integer representation of the timestamp when the last
+    /// touch event was recieved.
+    pub fn gvr_controller_state_get_last_touch_timestamp(state: *const gvr_controller_state)
+        -> i64;
 }
 extern "C" {
+
     /// Returns the timestamp (nanos) when the last button event was received.
-///
-/// @param state The controller state to get the last button event timestamp
-///     from.
-/// @return A 64-bit integer representation of the timestamp when the last
-///     button event was recieved.
-    pub fn gvr_controller_state_get_last_button_timestamp(state:
-                                                              *const gvr_controller_state)
-     -> i64;
+    ///
+    /// @param state The controller state to get the last button event timestamp
+    /// from.
+    /// @return A 64-bit integer representation of the timestamp when the last
+    /// button event was recieved.
+    pub fn gvr_controller_state_get_last_button_timestamp(
+        state: *const gvr_controller_state,
+    ) -> i64;
 }
 extern "C" {
+
     /// Current (latest) controller simulated position for use with an elbow model.
-///
-/// @param state The controller state to get the latest simulated position from.
-/// @return The current controller simulated position (intended for use with an
-///     elbow model).
-    pub fn gvr_controller_state_get_position(state:
-                                                 *const gvr_controller_state)
-     -> gvr_vec3f;
+    ///
+    /// @param state The controller state to get the latest simulated position from.
+    /// @return The current controller simulated position (intended for use with an
+    /// elbow model).
+    pub fn gvr_controller_state_get_position(state: *const gvr_controller_state) -> gvr_vec3f;
 }
 extern "C" {
+
     /// Returns the timestamp (nanos) when the last position event was received.
-///
-/// @param state The controller state to get the last position event timestamp
-///     from.
-/// @return A 64-bit integer representation of the timestamp when the last
-///     position event was recieved.
-    pub fn gvr_controller_state_get_last_position_timestamp(state:
-                                                                *const gvr_controller_state)
-     -> i64;
+    ///
+    /// @param state The controller state to get the last position event timestamp
+    /// from.
+    /// @return A 64-bit integer representation of the timestamp when the last
+    /// position event was recieved.
+    pub fn gvr_controller_state_get_last_position_timestamp(
+        state: *const gvr_controller_state,
+    ) -> i64;
 }
 extern "C" {
+
     /// Returns whether the controller battery is currently charging.
-/// This may not be real time information and may be slow to be updated.
-/// The last battery update time is available by calling
-/// gvr_controller_state_get_battery_timestamp.
-///
-/// @param state The controller state to get the battery charging state from.
-/// @return True iff the battery was charging at the last available update,
-///     false otherwise.
-    pub fn gvr_controller_state_get_battery_charging(state:
-                                                         *const gvr_controller_state)
-     -> bool;
+    /// This may not be real time information and may be slow to be updated.
+    /// The last battery update time is available by calling
+    /// gvr_controller_state_get_battery_timestamp.
+    ///
+    /// @param state The controller state to get the battery charging state from.
+    /// @return True iff the battery was charging at the last available update,
+    /// false otherwise.
+    pub fn gvr_controller_state_get_battery_charging(state: *const gvr_controller_state) -> bool;
 }
 extern "C" {
+
     /// Returns the bucketed controller battery level at the last update.
-/// Note this is a gvr_controller_battery_level and not a percent.
-/// The last battery update time is available by calling
-/// gvr_controller_state_get_battery_timestamp.
-///
-/// @param state The controller state to get the battery level from.
-/// @return The last known battery level as a gvr_controller_battery_level
-///     variant.
-    pub fn gvr_controller_state_get_battery_level(state:
-                                                      *const gvr_controller_state)
-     -> i32;
+    /// Note this is a gvr_controller_battery_level and not a percent.
+    /// The last battery update time is available by calling
+    /// gvr_controller_state_get_battery_timestamp.
+    ///
+    /// @param state The controller state to get the battery level from.
+    /// @return The last known battery level as a gvr_controller_battery_level
+    /// variant.
+    pub fn gvr_controller_state_get_battery_level(state: *const gvr_controller_state) -> i32;
 }
 extern "C" {
+
     /// Returns the timestamp (nanos) when the last battery event was received.
-///
-/// @param state The controller state to get battery event timestamp from.
-/// @return A 64-bit integer representation of the timestamp when the last
-///     battery event was received.
-    pub fn gvr_controller_state_get_last_battery_timestamp(state:
-                                                               *const gvr_controller_state)
-     -> i64;
+    ///
+    /// @param state The controller state to get battery event timestamp from.
+    /// @return A 64-bit integer representation of the timestamp when the last
+    /// battery event was received.
+    pub fn gvr_controller_state_get_last_battery_timestamp(
+        state: *const gvr_controller_state,
+    ) -> i64;
 }
 extern "C" {
+
     /// Convenience to convert a battery level to string. The returned pointer
-/// is static and valid throughout the lifetime of the application.
-///
-/// @param level The gvr_controller_battery_level to convert to string.
-/// @return A pointer to a string that describes the value.
-    pub fn gvr_controller_battery_level_to_string(level: i32)
-     -> *const ::std::os::raw::c_char;
+    /// is static and valid throughout the lifetime of the application.
+    ///
+    /// @param level The gvr_controller_battery_level to convert to string.
+    /// @return A pointer to a string that describes the value.
+    pub fn gvr_controller_battery_level_to_string(level: i32) -> *const ::std::os::raw::c_char;
 }

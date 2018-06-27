@@ -8,6 +8,8 @@ fn main() {
     if android {
         let abi = if target.contains("aarch64") {
             "arm64-v8a"
+        } else if target.contains("i686") {
+            "x86"
         } else if target.contains("x86") {
             "x86"
         } else if target.contains("arm") {

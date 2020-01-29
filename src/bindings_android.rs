@@ -4193,7 +4193,6 @@ pub struct gvr_context_ {
 /// Primary context for invoking Google VR APIs.
 pub type gvr_context = gvr_context_;
 #[repr(u32)]
-#[repr(C)]
 /// An enum for the left and right eye.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_eye {
@@ -4202,7 +4201,6 @@ pub enum gvr_eye {
     GVR_NUM_EYES = 2,
 }
 #[repr(u32)]
-#[repr(C)]
 /// The type of VR viewer.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_viewer_type {
@@ -4210,7 +4208,6 @@ pub enum gvr_viewer_type {
     GVR_VIEWER_TYPE_DAYDREAM = 1,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Types of VR-specific features which may or may not be supported on the
 /// underlying platform.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -4965,7 +4962,6 @@ fn bindgen_test_layout_gvr_value() {
     );
 }
 #[repr(u32)]
-#[repr(C)]
 /// The type of a recentering associated with a GVR_EVENT_RECENTER event.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_recenter_event_type {
@@ -5132,7 +5128,6 @@ fn bindgen_test_layout_gvr_event() {
     );
 }
 #[repr(u32)]
-#[repr(C)]
 /// Constants that represent GVR error codes.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_error {
@@ -5143,7 +5138,6 @@ pub enum gvr_error {
     GVR_ERROR_NO_PROPERTY_AVAILABLE = 1000001,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Constants that represent the status of the controller API.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_api_status {
@@ -5156,7 +5150,6 @@ pub enum gvr_controller_api_status {
     GVR_CONTROLLER_API_MALFUNCTION = 6,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Constants that represent the state of the controller.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_connection_state {
@@ -5166,7 +5159,6 @@ pub enum gvr_controller_connection_state {
     GVR_CONTROLLER_CONNECTED = 3,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Controller buttons.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_button {
@@ -5179,7 +5171,6 @@ pub enum gvr_controller_button {
     GVR_CONTROLLER_BUTTON_COUNT = 6,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Controller battery states.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_battery_level {
@@ -5199,7 +5190,6 @@ pub struct gvr_controller_state_ {
 /// Opaque handle to controller state.
 pub type gvr_controller_state = gvr_controller_state_;
 #[repr(u32)]
-#[repr(C)]
 /// Rendering modes define CPU load / rendering quality balances.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_audio_rendering_mode {
@@ -5208,7 +5198,6 @@ pub enum gvr_audio_rendering_mode {
     GVR_AUDIO_RENDERING_BINAURAL_HIGH_QUALITY = 2,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Room surface material names, used to set room properties.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_audio_material_type {
@@ -5237,7 +5226,6 @@ pub enum gvr_audio_material_type {
     GVR_AUDIO_MATERIAL_WOOD_PANEL = 22,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Distance rolloff models used for distance attenuation.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_audio_distance_rolloff_type {
@@ -5248,7 +5236,6 @@ pub enum gvr_audio_distance_rolloff_type {
 /// Sound object and sound field identifier.
 pub type gvr_audio_source_id = i32;
 #[repr(u32)]
-#[repr(C)]
 /// Supported surround sound formats.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_audio_surround_format_type {
@@ -5265,7 +5252,6 @@ pub enum gvr_audio_surround_format_type {
     GVR_AUDIO_SURROUND_FORMAT_THIRD_ORDER_AMBISONICS_WITH_NON_DIEGETIC_STEREO = 9,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Valid color formats for swap chain buffers.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_color_format_type {
@@ -5273,7 +5259,6 @@ pub enum gvr_color_format_type {
     GVR_COLOR_FORMAT_RGB_565 = 1,
 }
 #[repr(u32)]
-#[repr(C)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_depth_stencil_format_type {
     GVR_DEPTH_STENCIL_FORMAT_NONE = 255,
@@ -5285,7 +5270,6 @@ pub enum gvr_depth_stencil_format_type {
     GVR_DEPTH_STENCIL_FORMAT_STENCIL_8 = 5,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Types of asynchronous reprojection.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_reprojection {
@@ -5293,14 +5277,12 @@ pub enum gvr_reprojection {
     GVR_REPROJECTION_FULL = 1,
 }
 #[repr(u32)]
-#[repr(C)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_controller_handedness {
     GVR_CONTROLLER_RIGHT_HANDED = 0,
     GVR_CONTROLLER_LEFT_HANDED = 1,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Types of gaze behaviors used for arm model.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_arm_model_behavior {
@@ -5315,7 +5297,6 @@ pub struct gvr_user_prefs_ {
 }
 pub type gvr_user_prefs = gvr_user_prefs_;
 #[repr(u32)]
-#[repr(C)]
 /// Property types exposed by the gvr_properties_get() API.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_property_type {
@@ -5327,7 +5308,6 @@ pub enum gvr_property_type {
     GVR_PROPERTY_TRACKING_STATUS = 6,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Safety region types exposed from the GVR_PROPERTY_SAFETY_REGION property.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_safety_region_type {
@@ -5335,7 +5315,6 @@ pub enum gvr_safety_region_type {
     GVR_SAFETY_REGION_CYLINDER = 1,
 }
 #[repr(u32)]
-#[repr(C)]
 /// Value types for the contents of a gvr_value object instance.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_value_type {
@@ -5355,7 +5334,6 @@ pub enum gvr_value_type {
     GVR_VALUE_TYPE_CLOCK_TIME_POINT = 13,
 }
 #[repr(u32)]
-#[repr(C)]
 /// The type of gvr_event.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum gvr_event_type {
